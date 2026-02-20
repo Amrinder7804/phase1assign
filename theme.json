@@ -1,57 +1,43 @@
 {
-	"version": 2,
-	"$schema": "https://schemas.wp.org/trunk/theme.json",
-	"settings": {
-		"appearanceTools": true,
-		"useRootPaddingAwareAlignments": true,
-		"color": {
-			"palette": [
-				{
-					"slug": "base",
-					"color": "#ffffff",
-					"name": "Base"
-				},
-				{
-					"slug": "contrast",
-					"color": "#f0f0f0",
-					"name": "Contrast"
-				},
-				{
-					"slug": "primary",
-					"color": "#0073aa",
-					"name": "Primary"
-				},
-				{
-					"slug": "secondary",
-					"color": "#00a0d2",
-					"name": "Secondary"
-				}
-			]
-		},
-		"layout": {
-			"contentSize": "700px",
-			"wideSize": "1100px"
-		},
-		"spacing": {
-			"units": [ "px", "em", "rem", "vh", "vw", "%" ]
-		},
-		"typography": {
-			"fontFamilies": [
-				{
-					"name": "System (Roboto, Segoe UI, Ubuntu)",
-					"slug": "system",
-					"fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif"
-				}
-			]
-		}
+"version": 2,
+"$schema": "https://schemas.wp.org/trunk/theme.json",
+"settings": {
+	"appearanceTools": true,
+	"useRootPaddingAwareAlignments": true,
+	"color": {
+	"palette": [
+		{ "slug": "base", "color": "#ffffff", "name": "Base" },
+		{ "slug": "surface", "color": "#f5f7fa", "name": "Surface" },
+		{ "slug": "text", "color": "#111827", "name": "Text" },
+		{ "slug": "muted", "color": "#6b7280", "name": "Muted" },
+		{ "slug": "primary", "color": "#0073aa", "name": "Primary" },
+		{ "slug": "secondary", "color": "#00a0d2", "name": "Secondary" }
+	]
 	},
-	"styles": {
-		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--system)"
-		},
-		"color": {
-			"background": "var(--wp--preset--color--base)",
-			"text": "var(--wp--preset--color--contrast)"
+	"layout": {
+	"contentSize": "700px",
+	"wideSize": "1100px"
+	},
+	"spacing": {
+	"units": ["px", "em", "rem", "vh", "vw", "%"]
+	},
+	"typography": {
+	"fontFamilies": [
+		{
+		"name": "System (Roboto, Segoe UI, Ubuntu)",
+		"slug": "system",
+		"fontFamily": "-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,\"Helvetica Neue\",sans-serif"
 		}
+	]
 	}
+},
+"styles": {
+	"typography": {
+	"fontFamily": "var(--wp--preset--font-family--system)"
+	},
+	"color": {
+	"background": "var(--wp--preset--color--base)",
+	"text": "var(--wp--preset--color--text)"
+	}
+}
 }
