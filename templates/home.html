@@ -1,0 +1,70 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"30px","bottom":"60px","left":"20px","right":"20px"}}}} -->
+<main class="wp-block-group" style="padding-top:30px;padding-right:20px;padding-bottom:60px;padding-left:20px">
+
+<!-- wp:group {"className":"blog-archive-hero","layout":{"type":"constrained"}} -->
+<div class="wp-block-group blog-archive-hero">
+
+<!-- wp:heading {"textAlign":"center","level":1,"className":"blog-archive-title"} -->
+<h1 class="wp-block-heading has-text-align-center blog-archive-title">Fresh Ideas & Grocery Tips</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph {"align":"center","className":"blog-archive-intro"} -->
+<p class="has-text-align-center blog-archive-intro">Explore helpful food tips, student snack ideas, grocery inspiration, and fresh updates from our store.</p>
+<!-- /wp:paragraph -->
+
+</div>
+<!-- /wp:group -->
+
+<!-- wp:separator {"className":"section-divider"} -->
+<hr class="wp-block-separator has-alpha-channel-opacity section-divider"/>
+<!-- /wp:separator -->
+
+<!-- wp:query {"query":{"perPage":6,"postType":"post","order":"desc","orderBy":"date"},"displayLayout":{"type":"grid","columns":2}} -->
+<div class="wp-block-query">
+
+<!-- wp:post-template -->
+
+<!-- wp:group {"className":"blog-card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group blog-card">
+
+<!-- wp:post-featured-image {"isLink":true,"height":"260px"} /-->
+
+<!-- wp:post-title {"isLink":true,"className":"blog-card-title"} /-->
+
+<!-- wp:post-date {"className":"blog-card-date"} /-->
+
+<!-- wp:post-excerpt {"className":"blog-card-excerpt"} /-->
+
+</div>
+<!-- /wp:group -->
+
+<!-- /wp:post-template -->
+
+<!-- wp:query-no-results -->
+<!-- wp:group {"className":"blog-card","layout":{"type":"constrained"}} -->
+<div class="wp-block-group blog-card">
+<!-- wp:heading {"level":3,"className":"blog-card-title"} -->
+<h3 class="wp-block-heading blog-card-title">No blog posts yet</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"className":"blog-card-excerpt"} -->
+<p class="blog-card-excerpt">Add at least 2 posts from Dashboard → Posts to complete your blog deliverable and show content here.</p>
+<!-- /wp:paragraph -->
+</div>
+<!-- /wp:group -->
+<!-- /wp:query-no-results -->
+
+<!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"center"},"className":"blog-pagination"} -->
+<!-- wp:query-pagination-previous /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next /-->
+<!-- /wp:query-pagination -->
+
+</div>
+<!-- /wp:query -->
+
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

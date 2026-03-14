@@ -1,19 +1,52 @@
-<!-- wp:group {"tagName":"header","layout":{"type":"constrained"}} -->
-<header class="wp-block-group" style="padding:20px 0;">
-    
-    <!-- wp:group {"layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center"}} -->
-    <div class="wp-block-group">
-        
-        <!-- wp:site-logo {"width":60} /-->
-        
-        <!-- wp:navigation {"layout":{"type":"flex","justifyContent":"right"}} -->
-        <!-- wp:navigation-link {"label":"Home","url":"/"} /-->
-        <!-- wp:navigation-link {"label":"About","url":"/about"} /-->
-        <!-- wp:navigation-link {"label":"Contact","url":"/contact"} /-->
-        <!-- /wp:navigation -->
+<!-- wp:group {"tagName":"header","className":"phase1-shell-header","layout":{"type":"constrained"}} -->
+<header class="wp-block-group phase1-shell-header">
 
-    </div>
-    <!-- /wp:group -->
+	<!-- wp:group {"className":"phase1-topbar","layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center","flexWrap":"nowrap"}} -->
+	<div class="wp-block-group phase1-topbar">
+
+		<!-- wp:group {"className":"phase1-topbar-brand","layout":{"type":"flex","verticalAlignment":"center","flexWrap":"nowrap"}} -->
+		<div class="wp-block-group phase1-topbar-brand">
+			<!-- wp:site-logo {"width":64} /-->
+		</div>
+		<!-- /wp:group -->
+
+		<!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search products, posts, and recipes","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true,"className":"phase1-top-search"} /-->
+
+		<!-- wp:group {"className":"phase1-topbar-right","layout":{"type":"flex","verticalAlignment":"center","flexWrap":"nowrap"}} -->
+		<div class="wp-block-group phase1-topbar-right">
+			<!-- wp:shortcode -->
+			[phase1_cart_link]
+			<!-- /wp:shortcode -->
+		</div>
+		<!-- /wp:group -->
+
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"className":"phase1-sidebar","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group phase1-sidebar">
+		<!-- wp:group {"className":"phase1-sidebar-box","layout":{"type":"constrained"}} -->
+		<div class="wp-block-group phase1-sidebar-box">
+			<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"className":"phase1-sidebar-nav"} -->
+				<!-- wp:navigation-link {"label":"Home","url":"/"} /-->
+				<!-- wp:navigation-link {"label":"Shop","url":"/shop"} /-->
+				<!-- wp:navigation-link {"label":"Blog","url":"/post"} /-->
+				<!-- wp:navigation-link {"label":"About","url":"/about"} /-->
+				<!-- wp:navigation-link {"label":"Contact","url":"/contact"} /-->
+				<!-- wp:navigation-link {"label":"Cart","url":"/cart"} /-->
+			<!-- /wp:navigation -->
+
+			<!-- wp:separator {"className":"phase1-sidebar-divider"} -->
+			<hr class="wp-block-separator has-alpha-channel-opacity phase1-sidebar-divider"/>
+			<!-- /wp:separator -->
+
+			<!-- wp:paragraph {"className":"phase1-sidebar-account"} -->
+			<p class="phase1-sidebar-account"><a href="/my-account">Account</a></p>
+			<!-- /wp:paragraph -->
+		</div>
+		<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
 
 </header>
 <!-- /wp:group -->
