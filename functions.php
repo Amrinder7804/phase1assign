@@ -121,6 +121,18 @@ function phase1_enqueue_cart_fragments_script() {
 }
 add_action('wp_enqueue_scripts', 'phase1_enqueue_cart_fragments_script', 20);
 
+function phase1_cart_layout_open() {
+    if (!is_cart()) return;
+    echo '<div class="phase1-cart-layout">';
+}
+add_action('woocommerce_before_cart', 'phase1_cart_layout_open', 5);
+
+function phase1_cart_layout_close() {
+    if (!is_cart()) return;
+    echo '</div>';
+}
+add_action('woocommerce_after_cart', 'phase1_cart_layout_close', 20);
+
 function phase1_terms_page_fallback_redirect() {
     if (!is_404()) {
         return;
