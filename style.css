@@ -1838,6 +1838,14 @@ a.contact-info-value:hover { color: var(--green); }
   padding: 60px 24px 80px;
 }
 
+.legal-page-box {
+  background: #fff;
+  border: 0.0625rem solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--sh-sm);
+  padding: 2.25rem 2rem;
+}
+
 .legal-page h1,
 .legal-page .wp-block-post-title {
   margin-bottom: 24px;
@@ -1855,6 +1863,27 @@ a.contact-info-value:hover { color: var(--green); }
   margin-bottom: 18px;
   line-height: 1.75;
   max-width: 75ch;
+}
+
+.legal-page ul,
+.legal-page ol {
+  margin: 0 0 18px 1.25rem;
+  max-width: 75ch;
+}
+
+.legal-page li {
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
+
+.legal-page a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-page a:hover {
+  color: var(--green-dk);
 }
 
 .legal-page--privacy h2 {
@@ -1875,11 +1904,19 @@ a.contact-info-value:hover { color: var(--green); }
   .legal-page {
     padding: 48px 22px 64px;
   }
+
+  .legal-page-box {
+    padding: 2rem 1.5rem;
+  }
 }
 
 @media (max-width: 767px) {
   .legal-page {
     padding: 36px 18px 52px;
+  }
+
+  .legal-page-box {
+    padding: 1.5rem 1.125rem;
   }
 
   .legal-page h2 {
