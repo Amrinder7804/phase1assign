@@ -1828,7 +1828,7 @@ a.contact-info-value:hover { color: var(--green); }
 }
 
 /* =========================
-   LEGAL PAGES - PRIVACY POLICY
+   LEGAL PAGES - PRIVACY + TERMS
    Styles layout, spacing, and readability
 ========================= */
 
@@ -1839,29 +1839,42 @@ a.contact-info-value:hover { color: var(--green); }
 }
 
 .legal-page-box {
-  background: #fff;
-  border: 0.0625rem solid var(--border);
-  border-radius: var(--r-md);
-  box-shadow: var(--sh-sm);
-  padding: 2.25rem 2rem;
+  background: #f6f7f9;
+  border: 0.125rem solid var(--green);
+  border-radius: 1.25rem;
+  box-shadow: none;
+  padding: 3rem 3rem 2.5rem;
 }
 
 .legal-page h1,
 .legal-page .wp-block-post-title {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
   font-size: clamp(2rem, 4vw, 3rem);
   line-height: 1.1;
+  padding-bottom: 1.25rem;
+  border-bottom: 0.25rem solid var(--green);
 }
 
 .legal-page h2 {
-  margin-top: 36px;
+  margin-top: 32px;
   margin-bottom: 14px;
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--text);
 }
 
 .legal-page p {
   margin-bottom: 18px;
-  line-height: 1.75;
+  line-height: 1.8;
+  max-width: 75ch;
+}
+
+.legal-page .wp-block-post-content {
+  max-width: none !important;
+}
+
+.legal-page .wp-block-post-content > * {
   max-width: 75ch;
 }
 
@@ -1886,12 +1899,14 @@ a.contact-info-value:hover { color: var(--green); }
   color: var(--green-dk);
 }
 
-.legal-page--privacy h2 {
-  padding-top: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+.legal-page--privacy h2,
+.legal-page--terms h2 {
+  padding-top: 22px;
+  border-top: 0.0625rem solid rgba(17, 24, 39, 0.12);
 }
 
-.legal-page--privacy h2:first-of-type {
+.legal-page--privacy h2:first-of-type,
+.legal-page--terms h2:first-of-type {
   border-top: none;
   padding-top: 0;
 }
@@ -1906,7 +1921,7 @@ a.contact-info-value:hover { color: var(--green); }
   }
 
   .legal-page-box {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 2rem 2.125rem;
   }
 }
 
@@ -1916,7 +1931,8 @@ a.contact-info-value:hover { color: var(--green); }
   }
 
   .legal-page-box {
-    padding: 1.5rem 1.125rem;
+    padding: 1.75rem 1.25rem 1.5rem;
+    border-radius: 0.875rem;
   }
 
   .legal-page h2 {

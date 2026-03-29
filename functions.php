@@ -120,3 +120,38 @@ function phase1_enqueue_cart_fragments_script() {
     }
 }
 add_action('wp_enqueue_scripts', 'phase1_enqueue_cart_fragments_script', 20);
+
+function phase1_terms_page_fallback_redirect() {
+    if (!is_404()) {
+        return;
+    }
+
+    global $wp;
+
+    $requested_path = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+
+    if ($requested_path !== 'terms-and-conditions') {
+        return;
+    }
+
+    $terms_page_id = (int) get_option('woocommerce_terms_page_id');
+
+    if ($terms_page_id <= 0) {
+        $terms_page = get_page_by_path('terms-and-conditions', OBJECT, 'page');
+        $terms_page_id = $terms_page ? (int) $terms_page->ID : 0;
+    }
+
+    if ($terms_page_id <= 0) {
+        return;
+    }
+
+    $terms_url = get_permalink($terms_page_id);
+
+    if (!$terms_url) {
+        return;
+    }
+
+    wp_safe_redirect($terms_url, 301);
+    exit;
+}
+add_action('template_redirect', 'phase1_terms_page_fallback_redirect', 1);
