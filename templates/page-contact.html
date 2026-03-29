@@ -3,67 +3,87 @@
 <!-- wp:group {"tagName":"main","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"34px","bottom":"60px","left":"20px","right":"20px"}}}} -->
 <main class="wp-block-group" style="padding-top:34px;padding-right:20px;padding-bottom:60px;padding-left:20px">
 
-<!-- wp:group {"className":"contact-hero","style":{"spacing":{"margin":{"bottom":"26px"},"blockGap":"12px"}},"layout":{"type":"constrained"}} -->
+<!-- wp:group {"className":"contact-hero","style":{"spacing":{"margin":{"bottom":"26px"},"blockGap":"10px"}},"layout":{"type":"constrained"}} -->
 <div class="wp-block-group contact-hero" style="margin-bottom:26px">
-<!-- wp:post-title {"level":1,"className":"page-title"} /-->
-<!-- wp:paragraph -->
-<p>Have a question about products, orders, or events? Send us a message and we will get back to you quickly.</p>
-<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
-
-<!-- wp:columns {"className":"contact-grid","style":{"spacing":{"blockGap":{"left":"24px"}}}} -->
-<div class="wp-block-columns contact-grid">
-<!-- wp:column -->
-<div class="wp-block-column">
-<!-- wp:group {"className":"contact-card","layout":{"type":"constrained"}} -->
-<div class="wp-block-group contact-card">
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Store Hours</h3>
+<!-- wp:heading {"level":1,"className":"page-title"} -->
+<h1 class="wp-block-heading page-title">Contact Us</h1>
 <!-- /wp:heading -->
 <!-- wp:paragraph -->
-<p>Mon - Fri: 9:00 AM - 8:00 PM</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p>Sat - Sun: 10:00 AM - 6:00 PM</p>
+<p>Have a question or want to get involved? Reach out to us and we will respond as soon as possible.</p>
 <!-- /wp:paragraph -->
 </div>
 <!-- /wp:group -->
-</div>
-<!-- /wp:column -->
-
-<!-- wp:column -->
-<div class="wp-block-column">
-<!-- wp:group {"className":"contact-card","layout":{"type":"constrained"}} -->
-<div class="wp-block-group contact-card">
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Contact Info</h3>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>Email: support@organicgrocery.com</p>
-<!-- /wp:paragraph -->
-<!-- wp:paragraph -->
-<p>Phone: (905) 555-2345</p>
-<!-- /wp:paragraph -->
-</div>
-<!-- /wp:group -->
-</div>
-<!-- /wp:column -->
-</div>
-<!-- /wp:columns -->
 
 <!-- wp:separator {"className":"section-divider"} -->
 <hr class="wp-block-separator has-alpha-channel-opacity section-divider"/>
 <!-- /wp:separator -->
 
-<!-- wp:group {"className":"contact-form-wrap","style":{"spacing":{"margin":{"top":"22px"}}},"layout":{"type":"constrained"}} -->
-<div class="wp-block-group contact-form-wrap">
-<!-- wp:heading {"level":3} -->
-<h3 class="wp-block-heading">Send Us a Message</h3>
-<!-- /wp:heading -->
-<!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+<!-- wp:html -->
+<div class="contact-layout">
+
+	<!-- LEFT: Contact Info Box -->
+	<div class="contact-info-box">
+		<h3 class="contact-info-heading">Contact Information</h3>
+		<ul class="contact-info-list">
+			<li>
+				<span class="contact-info-icon">✉️</span>
+				<div>
+					<span class="contact-info-label">Email</span>
+					<a href="mailto:support@organicgrocery.com" class="contact-info-value">support@organicgrocery.com</a>
+				</div>
+			</li>
+			<li>
+				<span class="contact-info-icon">📞</span>
+				<div>
+					<span class="contact-info-label">Phone</span>
+					<a href="tel:+19055552345" class="contact-info-value">(905) 555-2345</a>
+				</div>
+			</li>
+			<li>
+				<span class="contact-info-icon">🕐</span>
+				<div>
+					<span class="contact-info-label">Office Hours</span>
+					<span class="contact-info-value">Monday – Friday, 9am – 6pm</span>
+				</div>
+			</li>
+			<li>
+				<span class="contact-info-icon">🏠</span>
+				<div>
+					<span class="contact-info-label">Store Hours</span>
+					<span class="contact-info-value">Mon – Fri: 9am – 8pm<br>Sat – Sun: 10am – 6pm</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<!-- RIGHT: Message Form Box -->
+	<div class="contact-form-box">
+		<h3 class="contact-form-heading">Send Us a Message</h3>
+		<form class="contact-form" action="#" method="post" novalidate>
+			<div class="contact-form-row">
+				<label class="contact-form-label" for="cf-name">Your name</label>
+				<input class="contact-form-input" type="text" id="cf-name" name="your-name" placeholder="Jane Smith" required>
+			</div>
+			<div class="contact-form-row">
+				<label class="contact-form-label" for="cf-email">Your email</label>
+				<input class="contact-form-input" type="email" id="cf-email" name="your-email" placeholder="jane@email.com" required>
+			</div>
+			<div class="contact-form-row">
+				<label class="contact-form-label" for="cf-subject">Subject</label>
+				<input class="contact-form-input" type="text" id="cf-subject" name="your-subject" placeholder="How can we help?">
+			</div>
+			<div class="contact-form-row">
+				<label class="contact-form-label" for="cf-message">Your message <span class="contact-form-optional">(optional)</span></label>
+				<textarea class="contact-form-input contact-form-textarea" id="cf-message" name="your-message" placeholder="Write your message here…"></textarea>
+			</div>
+			<div class="contact-form-row">
+				<button class="contact-form-submit" type="submit">Send Message</button>
+			</div>
+		</form>
+	</div>
+
 </div>
-<!-- /wp:group -->
+<!-- /wp:html -->
 
 </main>
 <!-- /wp:group -->

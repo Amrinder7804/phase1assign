@@ -1,8 +1,41 @@
+<!-- wp:html -->
+<input type="checkbox" id="phase1-nav-toggle" class="phase1-nav-checkbox" aria-hidden="true">
+<label for="phase1-nav-toggle" class="phase1-overlay" aria-hidden="true"></label>
+
+<aside class="phase1-sidebar" aria-label="Site navigation">
+	<div class="phase1-sidebar-head">
+		<a href="/" class="phase1-sidebar-logo">
+			<span class="phase1-sidebar-brand">Phase1 Grocery</span>
+		</a>
+		<!-- close btn only visible on mobile -->
+		<label for="phase1-nav-toggle" class="phase1-sidebar-close" aria-label="Close menu">&times;</label>
+	</div>
+	<nav class="phase1-sidebar-nav">
+		<ul>
+			<li><a href="/"><span class="nav-icon">🏠</span> Home</a></li>
+			<li><a href="/shop"><span class="nav-icon">🛍️</span> Shop</a></li>
+			<li><a href="/post"><span class="nav-icon">📝</span> Blog</a></li>
+			<li><a href="/about"><span class="nav-icon">ℹ️</span> About</a></li>
+			<li><a href="/contact"><span class="nav-icon">✉️</span> Contact</a></li>
+			<li><a href="/cart"><span class="nav-icon">🛒</span> Cart</a></li>
+			<li><a href="/my-account"><span class="nav-icon">👤</span> Account</a></li>
+		</ul>
+	</nav>
+</aside>
+<!-- /wp:html -->
+
 <!-- wp:group {"tagName":"header","className":"phase1-shell-header","layout":{"type":"constrained"}} -->
 <header class="wp-block-group phase1-shell-header">
 
 	<!-- wp:group {"className":"phase1-topbar","layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center","flexWrap":"nowrap"}} -->
 	<div class="wp-block-group phase1-topbar">
+
+		<!-- Hamburger — only shown on mobile via CSS -->
+		<!-- wp:html -->
+		<label for="phase1-nav-toggle" class="phase1-hamburger" aria-label="Open menu">
+			<span></span><span></span><span></span>
+		</label>
+		<!-- /wp:html -->
 
 		<!-- wp:group {"className":"phase1-topbar-brand","layout":{"type":"flex","verticalAlignment":"center","flexWrap":"nowrap"}} -->
 		<div class="wp-block-group phase1-topbar-brand">
@@ -20,31 +53,6 @@
 		</div>
 		<!-- /wp:group -->
 
-	</div>
-	<!-- /wp:group -->
-
-	<!-- wp:group {"className":"phase1-sidebar","layout":{"type":"constrained"}} -->
-	<div class="wp-block-group phase1-sidebar">
-		<!-- wp:group {"className":"phase1-sidebar-box","layout":{"type":"constrained"}} -->
-		<div class="wp-block-group phase1-sidebar-box">
-			<!-- wp:navigation {"overlayMenu":"never","layout":{"type":"flex","orientation":"vertical","justifyContent":"left"},"className":"phase1-sidebar-nav"} -->
-				<!-- wp:navigation-link {"label":"Home","url":"/"} /-->
-				<!-- wp:navigation-link {"label":"Shop","url":"/shop"} /-->
-				<!-- wp:navigation-link {"label":"Blog","url":"/post"} /-->
-				<!-- wp:navigation-link {"label":"About","url":"/about"} /-->
-				<!-- wp:navigation-link {"label":"Contact","url":"/contact"} /-->
-				<!-- wp:navigation-link {"label":"Cart","url":"/cart"} /-->
-			<!-- /wp:navigation -->
-
-			<!-- wp:separator {"className":"phase1-sidebar-divider"} -->
-			<hr class="wp-block-separator has-alpha-channel-opacity phase1-sidebar-divider"/>
-			<!-- /wp:separator -->
-
-			<!-- wp:paragraph {"className":"phase1-sidebar-account"} -->
-			<p class="phase1-sidebar-account"><a href="/my-account">Account</a></p>
-			<!-- /wp:paragraph -->
-		</div>
-		<!-- /wp:group -->
 	</div>
 	<!-- /wp:group -->
 

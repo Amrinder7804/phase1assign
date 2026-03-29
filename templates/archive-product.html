@@ -1,46 +1,46 @@
 <!-- wp:template-part {"slug":"header","tagName":"header"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"32px","bottom":"60px","left":"20px","right":"20px"}}}} -->
-<main class="wp-block-group" style="padding-top:32px;padding-right:20px;padding-bottom:60px;padding-left:20px">
+<!-- wp:group {"tagName":"main","layout":{"type":"constrained","contentSize":"1200px"},"style":{"spacing":{"padding":{"top":"2rem","bottom":"4rem","left":"1.5rem","right":"1.5rem"}}}} -->
+<main class="wp-block-group" style="padding-top:2rem;padding-right:1.5rem;padding-bottom:4rem;padding-left:1.5rem">
 
-	<!-- wp:group {"layout":{"type":"constrained"},"style":{"spacing":{"blockGap":"14px","margin":{"bottom":"28px"}}}} -->
-	<div class="wp-block-group" style="margin-bottom:28px">
-
-		<!-- wp:woocommerce/breadcrumbs /-->
-
-		<!-- wp:heading {"textAlign":"center","level":1,"className":"shop-title"} -->
-		<h1 class="wp-block-heading has-text-align-center shop-title">Shop Fresh Groceries</h1>
-		<!-- /wp:heading -->
-
-		<!-- wp:paragraph {"align":"center","className":"shop-subtitle"} -->
-		<p class="has-text-align-center shop-subtitle">Browse our healthy grocery essentials, fresh fruit, snacks, and dairy products.</p>
-		<!-- /wp:paragraph -->
-
+<!-- wp:html -->
+<div class="shop-hero-box">
+	<div class="shop-hero-inner">
+		<h1 class="shop-hero-title">🛍️ Shop Fresh Groceries</h1>
+		<p class="shop-hero-text">Browse our healthy grocery essentials — fresh fruit, snacks, dairy, and more. Delivered to your door.</p>
 	</div>
-	<!-- /wp:group -->
+</div>
+<!-- /wp:html -->
 
-	<!-- wp:separator {"className":"section-divider"} -->
-	<hr class="wp-block-separator has-alpha-channel-opacity section-divider"/>
-	<!-- /wp:separator -->
+<!-- wp:woocommerce/store-notices /-->
 
-	<!-- wp:woocommerce/store-notices /-->
-
-	<!-- wp:woocommerce/product-results-count /-->
-
-	<!-- wp:woocommerce/catalog-sorting /-->
-
-	<!-- wp:woocommerce/product-collection {"queryId":0,"query":{"perPage":9,"pages":0,"offset":0,"postType":"product","order":"asc","orderBy":"title","inherit":true,"taxQuery":null},"displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"collection":"woocommerce/product-collection/archive"} -->
-	<div class="wp-block-woocommerce-product-collection">
-		<!-- wp:woocommerce/product-template -->
-			<!-- wp:woocommerce/product-image {"imageSizing":"thumbnail"} /-->
-			<!-- wp:woocommerce/product-title {"isLink":true} /-->
-			<!-- wp:woocommerce/product-price /-->
-			<!-- wp:woocommerce/product-button /-->
-		<!-- /wp:woocommerce/product-template -->
+<!-- wp:html -->
+<div class="shop-toolbar">
+	<div class="shop-toolbar-left">
+		<!-- wp:woocommerce/product-results-count /-->
 	</div>
-	<!-- /wp:woocommerce/product-collection -->
+	<div class="shop-toolbar-right">
+		<!-- wp:woocommerce/catalog-sorting /-->
+	</div>
+</div>
+<!-- /wp:html -->
 
-	<!-- wp:woocommerce/product-collection-pagination /-->
+<!-- wp:woocommerce/product-results-count {"className":"shop-results-count"} /-->
+
+<!-- wp:woocommerce/catalog-sorting {"className":"shop-sorting"} /-->
+
+<!-- wp:woocommerce/product-collection {"queryId":0,"query":{"perPage":9,"pages":0,"offset":0,"postType":"product","order":"asc","orderBy":"title","inherit":true,"taxQuery":null},"displayLayout":{"type":"flex","columns":3,"shrinkColumns":true},"collection":"woocommerce/product-collection/archive","className":"shop-product-grid"} -->
+<div class="wp-block-woocommerce-product-collection shop-product-grid">
+	<!-- wp:woocommerce/product-template -->
+		<!-- wp:woocommerce/product-image {"imageSizing":"thumbnail"} /-->
+		<!-- wp:woocommerce/product-title {"isLink":true} /-->
+		<!-- wp:woocommerce/product-price /-->
+		<!-- wp:woocommerce/product-button /-->
+	<!-- /wp:woocommerce/product-template -->
+</div>
+<!-- /wp:woocommerce/product-collection -->
+
+<!-- wp:woocommerce/product-collection-pagination /-->
 
 </main>
 <!-- /wp:group -->
