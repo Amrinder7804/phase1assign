@@ -134,11 +134,11 @@ function phase1_terms_page_fallback_redirect() {
         return;
     }
 
-    $terms_page_id = (int) get_option('woocommerce_terms_page_id');
+    $terms_page = get_page_by_path('terms-and-conditions', OBJECT, 'page');
+    $terms_page_id = $terms_page ? (int) $terms_page->ID : 0;
 
     if ($terms_page_id <= 0) {
-        $terms_page = get_page_by_path('terms-and-conditions', OBJECT, 'page');
-        $terms_page_id = $terms_page ? (int) $terms_page->ID : 0;
+        $terms_page_id = (int) get_option('woocommerce_terms_page_id');
     }
 
     if ($terms_page_id <= 0) {

@@ -1838,7 +1838,8 @@ a.contact-info-value:hover { color: var(--green); }
   padding: 60px 24px 80px;
 }
 
-.legal-page-box {
+.legal-page--privacy,
+.legal-page--terms {
   background: #f6f7f9;
   border: 0.125rem solid var(--green);
   border-radius: 1.25rem;
@@ -1853,9 +1854,13 @@ a.contact-info-value:hover { color: var(--green); }
   line-height: 1.1;
   padding-bottom: 1.25rem;
   border-bottom: 0.25rem solid var(--green);
+  text-align: left !important;
+  font-weight: 900;
+  width: 100%;
 }
 
-.legal-page h2 {
+.legal-page h2,
+.legal-page h3 {
   margin-top: 32px;
   margin-bottom: 14px;
   font-size: clamp(1.35rem, 2.6vw, 1.85rem);
@@ -1899,14 +1904,14 @@ a.contact-info-value:hover { color: var(--green); }
   color: var(--green-dk);
 }
 
-.legal-page--privacy h2,
-.legal-page--terms h2 {
+.legal-page--privacy :is(h2, h3),
+.legal-page--terms :is(h2, h3) {
   padding-top: 22px;
   border-top: 0.0625rem solid rgba(17, 24, 39, 0.12);
 }
 
-.legal-page--privacy h2:first-of-type,
-.legal-page--terms h2:first-of-type {
+.legal-page--privacy :is(h2, h3):first-of-type,
+.legal-page--terms :is(h2, h3):first-of-type {
   border-top: none;
   padding-top: 0;
 }
@@ -1920,7 +1925,8 @@ a.contact-info-value:hover { color: var(--green); }
     padding: 48px 22px 64px;
   }
 
-  .legal-page-box {
+  .legal-page--privacy,
+  .legal-page--terms {
     padding: 2.5rem 2rem 2.125rem;
   }
 }
@@ -1930,12 +1936,14 @@ a.contact-info-value:hover { color: var(--green); }
     padding: 36px 18px 52px;
   }
 
-  .legal-page-box {
+  .legal-page--privacy,
+  .legal-page--terms {
     padding: 1.75rem 1.25rem 1.5rem;
     border-radius: 0.875rem;
   }
 
-  .legal-page h2 {
+  .legal-page h2,
+  .legal-page h3 {
     margin-top: 28px;
   }
 
