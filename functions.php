@@ -167,3 +167,40 @@ function phase1_terms_page_fallback_redirect() {
     exit;
 }
 add_action('template_redirect', 'phase1_terms_page_fallback_redirect', 1);
+
+function phase1_account_menu_add_legal_links($items) {
+    $new_items = array();
+
+    foreach ($items as $endpoint => $label) {
+        $new_items[$endpoint] = $label;
+
+        if ($endpoint === 'edit-account') {
+            $new_items['privacy-policy-link'] = 'Privacy Policy';
+            $new_items['terms-and-conditions-link'] = 'Terms & Conditions';
+        }
+    }
+
+    if (!isset($new_items['privacy-policy-link'])) {
+        $new_items['privacy-policy-link'] = 'Privacy Policy';
+    }
+
+    if (!isset($new_items['terms-and-conditions-link'])) {
+        $new_items['terms-and-conditions-link'] = 'Terms & Conditions';
+    }
+
+    return $new_items;
+}
+add_filter('woocommerce_account_menu_items', 'phase1_account_menu_add_legal_links', 20);
+
+function phase1_account_menu_legal_link_urls($url, $endpoint) {
+    if ($endpoint === 'privacy-policy-link') {
+        return home_url('/privacy-policy');
+    }
+
+    if ($endpoint === 'terms-and-conditions-link') {
+        return home_url('/terms-and-conditions');
+    }
+
+    return $url;
+}
+add_filter('woocommerce_get_endpoint_url', 'phase1_account_menu_legal_link_urls', 10, 2);

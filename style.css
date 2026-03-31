@@ -1,7 +1,16 @@
 /*
-Theme Name: Phase1
-Description: Phase1 Organic Grocery — Full Site Editing Theme
-Version: 1.0
+Theme Name: phase1
+Author: Amrinder
+Author URI:
+Theme URI:
+Tags: full-site-editing
+Text Domain: phase1
+Requires at least: 6.1
+Requires PHP: 7.4
+Tested up to: 6.4
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
 /* ═══════════════════════════════════════════════════════
@@ -66,6 +75,7 @@ body {
   /* Desktop: indent for fixed sidebar + fixed topbar */
   padding-left: var(--nav-w);
   padding-top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px));
+  padding-right: 0;
 }
 img { max-width: 100%; height: auto; display: block; }
 a   { color: inherit; text-decoration: none; }
@@ -79,6 +89,12 @@ input, select, textarea { font: inherit; }
    Desktop ≥ 1025px : sidebar always fixed left, header offset right
    Mobile  < 1025px : full-width topbar + slide-in drawer
 ═══════════════════════════════════════════════════════ */
+
+/* Main content padding — all pages */
+main.wp-block-group {
+  padding-left: max(2.5rem, 3vw) !important;
+  padding-right: max(2.5rem, 3vw) !important;
+}
 
 /* Hidden checkbox — toggle engine */
 .phase1-nav-checkbox {
@@ -94,13 +110,12 @@ input, select, textarea { font: inherit; }
   top: calc(var(--wp-admin--admin-bar--height, 0px) + var(--bar-h)); left: 0;
   width: var(--nav-w);
   height: calc(100vh - var(--wp-admin--admin-bar--height, 0px) - var(--bar-h));
-  z-index: 1100;
+  z-index: 900;
   background: #fff;
   border-right: 0.0625rem solid var(--border);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   transition: transform .28s cubic-bezier(.4,0,.2,1);
 }
 
@@ -118,6 +133,9 @@ input, select, textarea { font: inherit; }
 .phase1-sidebar-logo { display: flex; align-items: center; }
 .phase1-sidebar-brand {
   display: none;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: #fff;
 }
 
 /* Close btn — mobile only */
@@ -191,7 +209,7 @@ input, select, textarea { font: inherit; }
   top: var(--wp-admin--admin-bar--height, 0px) !important;
   left: 0 !important;
   right: 0 !important;
-  z-index: 900 !important;
+  z-index: 1100 !important;
   background: #fff !important;
   border-bottom: 0.0625rem solid var(--border) !important;
   box-shadow: var(--sh-sm) !important;
@@ -349,11 +367,12 @@ input, select, textarea { font: inherit; }
 }
 
 /* ═══════════════════════════════════════════════════════
-   MOBILE  < 1025px — hamburger mode
+   MOBILE  < 769px — hamburger mode
 ═══════════════════════════════════════════════════════ */
-@media (max-width: 64rem) {  /* 1024px */
+@media (max-width: 48rem) {  /* 768px */
 
-  body { padding-left: 0; }
+  body { padding-left: 0; padding-right: 0; }
+  main.wp-block-group { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
 
   /* On mobile sidebar slides in from top:0, full height */
   .phase1-sidebar {
@@ -363,6 +382,7 @@ input, select, textarea { font: inherit; }
     box-shadow: var(--sh-lg);
   }
   .phase1-sidebar-head { display: flex; }
+  .phase1-sidebar-brand { display: block; }
   .phase1-sidebar-close { display: flex; }
   .phase1-overlay { display: block; }
 
@@ -449,6 +469,8 @@ main.wp-block-group {
   width: 100% !important;
   box-sizing: border-box !important;
   overflow-x: hidden !important;
+  padding-left: max(2.5rem, 3vw) !important;
+  padding-right: max(2.5rem, 3vw) !important;
 }
 /* Override WP constrained layout — let content fill all available width */
 .wp-block-group.is-layout-constrained,
@@ -456,9 +478,23 @@ main.wp-block-group {
   padding-inline: 0 !important;
   max-width: 100% !important;
 }
+main.wp-block-group.is-layout-constrained,
+main.is-layout-constrained {
+  padding-left: max(2.5rem, 3vw) !important;
+  padding-right: max(2.5rem, 3vw) !important;
+}
 main.wp-block-group > * {
   max-width: 100% !important;
   box-sizing: border-box !important;
+}
+
+@media (max-width: 48rem) {
+  main.wp-block-group,
+  main.wp-block-group.is-layout-constrained,
+  main.is-layout-constrained {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1334,6 +1370,35 @@ li.product .price {
    MY ACCOUNT
 ═══════════════════════════════════════════════════════ */
 .account-page-subtitle { color: var(--muted); margin-bottom: 1.25rem; font-size: var(--fs-sm); }
+
+/* Two-column layout: sidebar nav + content */
+.woocommerce-account .woocommerce {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+.woocommerce-MyAccount-navigation {
+  width: 13rem;
+  flex-shrink: 0;
+  background: #fff;
+  border: 0.0625rem solid var(--border);
+  border-radius: var(--r-md);
+  padding: 1rem 0.75rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.04);
+}
+.woocommerce-MyAccount-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.woocommerce-MyAccount-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .woocommerce-MyAccount-navigation ul li a {
   display: block;
   padding: 0.625rem 1rem;
