@@ -13,10 +13,6 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
 
-/* ═══════════════════════════════════════════════════════
-   DESIGN TOKENS  (all spatial values in rem)
-   Base: 1rem = 16px
-═══════════════════════════════════════════════════════ */
 :root {
   /* Colours */
   --green:      #3aaa35;
@@ -63,6 +59,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 /* ═══════════════════════════════════════════════════════
    RESET
 ═══════════════════════════════════════════════════════ */
+
+.shop-product-grid {
+  --phase1-shop-image-h: 13rem;
+}
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
@@ -765,22 +765,121 @@ main.wp-block-group > * {
 /* ═══════════════════════════════════════════════════════
    SINGLE POST
 ═══════════════════════════════════════════════════════ */
-.single-post-title {
-  font-size: clamp(1.5rem, 3.5vw, var(--fs-2xl));
-  font-weight: 900;
-  line-height: 1.2;
-  margin-bottom: 0.875rem !important;
+
+/* Featured image — full width, fixed height, rounded */
+.single .wp-block-post-featured-image,
+.single-post .wp-block-post-featured-image {
+  margin: 0 0 2.5rem !important;
+  border-radius: var(--r-lg) !important;
+  overflow: hidden !important;
+  max-height: 28rem !important;
 }
+/* .single .wp-block-post-featured-image img, */
+.single-post .wp-block-post-featured-image img {
+  width: 100% !important;
+  height: 28rem !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  border-radius: var(--r-lg) !important;
+}
+
+/* Post title */
+.single-post-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 1rem !important;
+}
+
+/* Category label above title */
+.single-post-category {
+  margin-bottom: 0.75rem !important;
+}
+.single-post-category a {
+  display: inline-block;
+  background: var(--green-lt);
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--r-pill);
+  border: 0.0625rem solid var(--green-mid);
+}
+
+/* Meta row — date · author */
 .single-post-meta {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
   flex-wrap: wrap;
   font-size: var(--fs-sm);
   color: var(--muted);
-  margin-bottom: 1.75rem !important;
+  margin-bottom: 2rem !important;
+  padding-bottom: 1.5rem !important;
+  border-bottom: 0.0625rem solid var(--border) !important;
 }
 .single-post-meta .wp-block-post-terms a { color: var(--green); font-weight: 600; }
+.single-post-meta .wp-block-post-date,
+.single-post-meta .wp-block-post-author-name { color: var(--muted); }
+
+/* Post body typography */
+.single-post-body,
+.single .wp-block-post-content,
+.single-post .wp-block-post-content {
+  font-size: 1.0625rem !important;
+  line-height: 1.85 !important;
+  color: var(--text) !important;
+  padding: 2rem;
+}
+.single-post-body p,
+.single .wp-block-post-content p,
+.single-post .wp-block-post-content p {
+  margin-bottom: 1.5rem !important;
+  line-height: 1.85 !important;
+}
+.single-post-body h2,
+.single .wp-block-post-content h2,
+.single-post .wp-block-post-content h2 {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  margin: 2.5rem 0 1rem !important;
+  color: var(--text) !important;
+}
+.single-post-body h3,
+.single .wp-block-post-content h3,
+.single-post .wp-block-post-content h3 {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  margin: 2rem 0 0.75rem !important;
+  color: var(--text) !important;
+}
+.single-post-body ul,
+.single-post-body ol,
+.single .wp-block-post-content ul,
+.single .wp-block-post-content ol {
+  padding-left: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  list-style: disc !important;
+}
+.single-post-body ol,
+.single .wp-block-post-content ol { list-style: decimal !important; }
+.single-post-body li,
+.single .wp-block-post-content li {
+  margin-bottom: 0.5rem !important;
+  line-height: 1.75 !important;
+}
+.single-post-body strong,
+.single .wp-block-post-content strong { font-weight: 700; color: var(--text); }
+.single-post-body img,
+.single .wp-block-post-content img {
+  border-radius: var(--r-md);
+  margin: 1.5rem 0 !important;
+  max-width: 100%;
+}
 
 /* ═══════════════════════════════════════════════════════
    GENERIC PAGE
@@ -826,11 +925,420 @@ main.wp-block-group > * {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.125rem;
+  margin-bottom: 1.5rem;
   padding: 0.625rem 1rem;
   background: var(--surface);
   border: 0.0625rem solid var(--border);
   border-radius: var(--r-sm);
+}
+
+/* =========================================================
+   RECIPE SINGLE - FORCE FALLBACK (live template safe)
+   ========================================================= */
+.single:not(.single-product) main.wp-block-group,
+.single-recipe main.wp-block-group {
+  padding-left: max(2rem, 4vw) !important;
+  padding-right: max(2rem, 4vw) !important;
+}
+
+.single:not(.single-product) main.wp-block-group .single-post-title,
+.single:not(.single-product) main.wp-block-group .wp-block-post-title,
+.single:not(.single-product) main.wp-block-group .wp-block-post-excerpt,
+.single:not(.single-product) main.wp-block-group .wp-block-post-content,
+.single-recipe main.wp-block-group .single-post-title,
+.single-recipe main.wp-block-group .wp-block-post-title,
+.single-recipe main.wp-block-group .wp-block-post-excerpt,
+.single-recipe main.wp-block-group .wp-block-post-content {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+
+@media (min-width: 60rem) {
+  .single:not(.single-product) main.wp-block-group,
+  .single-recipe main.wp-block-group {
+    position: relative !important;
+    padding-right: calc(21rem + max(2rem, 4vw)) !important;
+  }
+
+  .single:not(.single-product) main.wp-block-group .wp-block-post-featured-image:first-of-type,
+  .single-recipe main.wp-block-group .wp-block-post-featured-image:first-of-type {
+    position: absolute !important;
+    top: 2.5rem !important;
+    right: max(2.5rem, 3vw) !important;
+    width: 18.5rem !important;
+    height: 18.5rem !important;
+    margin: 0 !important;
+    padding: 0.45rem !important;
+    border: 0.0625rem solid var(--border) !important;
+    border-radius: var(--r-lg) !important;
+    background: #fff !important;
+    box-shadow: var(--sh-md) !important;
+    overflow: hidden !important;
+    max-height: none !important;
+    z-index: 2;
+  }
+
+  .single:not(.single-product) main.wp-block-group .wp-block-post-featured-image:first-of-type img,
+  .single-recipe main.wp-block-group .wp-block-post-featured-image:first-of-type img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: calc(var(--r-lg) - 0.25rem) !important;
+  }
+
+  .single:not(.single-product) main.wp-block-group .single-post-title,
+  .single:not(.single-product) main.wp-block-group .wp-block-post-title,
+  .single:not(.single-product) main.wp-block-group .wp-block-post-excerpt,
+  .single-recipe main.wp-block-group .single-post-title,
+  .single-recipe main.wp-block-group .wp-block-post-title,
+  .single-recipe main.wp-block-group .wp-block-post-excerpt {
+    max-width: 42rem !important;
+    margin-right: auto !important;
+  }
+}
+
+.single:not(.single-product) .wp-block-post-content h2,
+.single:not(.single-product) .wp-block-post-content h3,
+.single-recipe .wp-block-post-content h2,
+.single-recipe .wp-block-post-content h3 {
+  border-left: 0.25rem solid var(--green) !important;
+  padding-left: 0.75rem !important;
+}
+
+.single:not(.single-product) .wp-block-post-content ul,
+.single:not(.single-product) .wp-block-post-content ol,
+.single-recipe .wp-block-post-content ul,
+.single-recipe .wp-block-post-content ol {
+  margin: 0 0 1.25rem !important;
+  padding: 1rem 1.25rem 1rem 1.6rem !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  background: var(--surface) !important;
+}
+
+.single:not(.single-product) .wp-block-post-content blockquote,
+.single-recipe .wp-block-post-content blockquote,
+.single:not(.single-product) .wp-block-post-content .recipe-tip,
+.single-recipe .wp-block-post-content .recipe-tip {
+  margin: 1.5rem 0 !important;
+  padding: 1.125rem 1.375rem !important;
+  border-left: 0.25rem solid var(--green) !important;
+  background: var(--green-lt) !important;
+  border-radius: var(--r-md) !important;
+}
+
+@media (max-width: 59.9375rem) {
+  .single:not(.single-product) main.wp-block-group,
+  .single-recipe main.wp-block-group {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  .single:not(.single-product) main.wp-block-group .single-post-title,
+  .single:not(.single-product) main.wp-block-group .wp-block-post-title,
+  .single:not(.single-product) main.wp-block-group .wp-block-post-excerpt,
+  .single:not(.single-product) main.wp-block-group .wp-block-post-content,
+  .single-recipe main.wp-block-group .single-post-title,
+  .single-recipe main.wp-block-group .wp-block-post-title,
+  .single-recipe main.wp-block-group .wp-block-post-excerpt,
+  .single-recipe main.wp-block-group .wp-block-post-content {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .single:not(.single-product) main.wp-block-group .wp-block-post-featured-image:first-of-type,
+  .single-recipe main.wp-block-group .wp-block-post-featured-image:first-of-type {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 0 1rem !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* =========================================================
+   RECIPE SINGLE - CLASS-BASED LAYOUT (single.html)
+   ========================================================= */
+.single .single-recipe-layout {
+  display: grid;
+  gap: 1rem 2rem;
+  align-items: start;
+}
+
+.single .single-recipe-layout .single-recipe-title {
+  grid-area: title;
+  margin: 0 !important;
+  line-height: 1.1;
+}
+
+.single .single-recipe-layout .single-recipe-excerpt {
+  grid-area: excerpt;
+  margin: 0 !important;
+  color: var(--muted);
+}
+
+.single .single-recipe-layout .single-recipe-excerpt p {
+  margin: 0;
+}
+
+.single .single-recipe-layout .single-recipe-content {
+  grid-area: content;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.single .single-recipe-layout .single-recipe-image {
+  grid-area: image;
+  margin: 0 !important;
+  padding: 0.5rem !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-lg) !important;
+  background: #fff !important;
+  box-shadow: var(--sh-md) !important;
+  overflow: hidden !important;
+  max-height: none !important;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.single .single-recipe-layout .single-recipe-image img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  display: block !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: calc(var(--r-lg) - 0.25rem) !important;
+}
+
+.single .single-recipe-layout .single-recipe-image:hover {
+  transform: translateY(-0.25rem);
+  border-color: color-mix(in srgb, var(--green) 40%, var(--border));
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.14) !important;
+}
+
+.single .single-recipe-layout .single-recipe-content h2,
+.single .single-recipe-layout .single-recipe-content h3 {
+  border-left: 0.25rem solid var(--green);
+  padding-left: 0.75rem;
+}
+
+.single .single-recipe-layout .single-recipe-content ul,
+.single .single-recipe-layout .single-recipe-content ol {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.25rem 1rem 1.6rem;
+  border: 0.0625rem solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+
+.single .single-recipe-layout .single-recipe-content blockquote,
+.single .single-recipe-layout .single-recipe-content .recipe-tip {
+  margin: 1.5rem 0;
+  padding: 1.125rem 1.375rem;
+  border-left: 0.25rem solid var(--green);
+  background: var(--green-lt);
+  border-radius: var(--r-md);
+}
+
+@media (min-width: 60rem) {
+  .single .single-recipe-layout {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    grid-template-areas:
+      "title image"
+      "excerpt image"
+      "content content";
+    max-width: 68.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: max(2.5rem, 5vw) !important;
+    padding-right: max(2.5rem, 5vw) !important;
+  }
+
+  .single .single-recipe-layout .single-recipe-image {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    justify-self: end;
+    align-self: start;
+    width: 20rem !important;
+    height: 20rem !important;
+    aspect-ratio: 1 / 1 !important;
+  }
+}
+
+@media (max-width: 59.9375rem) {
+  .single .single-recipe-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "excerpt"
+      "image"
+      "content";
+    gap: 1rem;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .single .single-recipe-layout .single-recipe-content {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+
+  .single .single-recipe-layout .single-recipe-image {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    padding: 0.35rem !important;
+  }
+
+  .single .single-recipe-layout .single-recipe-image img {
+    max-height: 22rem;
+  }
+}
+
+.single .single-recipe-image img,
+.single-post .single-recipe-image img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  border-radius: 1.5rem !important;
+}
+
+.single .single-recipe-layout,
+.single-post .single-recipe-layout {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.single .single-recipe-title,
+.single-post .single-recipe-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.08;
+  font-weight: 800;
+  color: #142018;
+}
+
+.single .single-recipe-excerpt,
+.single-post .single-recipe-excerpt {
+  margin: 0 0 1.25rem;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: #536458;
+}
+
+.single .single-recipe-content,
+.single-post .single-recipe-content {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #1d281f;
+}
+
+.single .single-recipe-layout,
+.single-post .single-recipe-layout {
+  display: block !important;
+}
+
+.single .single-recipe-layout .recipe-top,
+.single-post .single-recipe-layout .recipe-top {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: nowrap !important;
+}
+
+.single .single-recipe-layout .recipe-top-content,
+.single-post .single-recipe-layout .recipe-top-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: calc(100% - 22rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image {
+  flex: 0 0 20rem;
+  width: 20rem !important;
+  height: 20rem !important;
+  margin-left: auto !important;
+  margin-bottom: 0 !important;
+  position: relative;
+  padding: 0.4rem !important;
+  border: 0.09375rem solid var(--border) !important;
+  border-radius: var(--r-lg) !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  box-shadow: var(--sh-md) !important;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image img,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image img {
+  border-radius: calc(var(--r-lg) - 0.25rem) !important;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image:hover,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image:hover {
+  transform: translateY(-0.2rem);
+  border-color: color-mix(in srgb, var(--green) 40%, var(--border));
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.14) !important;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image::after,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.45rem;
+  height: 0.1875rem;
+  background: var(--green);
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image:hover::after,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image:hover::after {
+  transform: scaleX(1);
+}
+
+.single .single-recipe-layout .single-recipe-content,
+.single-post .single-recipe-layout .single-recipe-content {
+  margin-top: 1.25rem !important;
+}
+
+@media (max-width: 47.9375rem) {
+  .single .single-recipe-layout .recipe-top,
+  .single-post .single-recipe-layout .recipe-top {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .single .single-recipe-layout .recipe-top-content,
+  .single-post .single-recipe-layout .recipe-top-content {
+    max-width: 100%;
+  }
+
+  .single .single-recipe-layout .recipe-top .single-recipe-image,
+  .single-post .single-recipe-layout .recipe-top .single-recipe-image {
+    width: 100% !important;
+    height: auto !important;
+    flex: none;
+  }
 }
 
 /* Override WC block spacing for results & sorting when inside toolbar */
@@ -858,6 +1366,42 @@ main.wp-block-group > * {
 }
 .woocommerce-ordering select:focus,
 .shop-sorting select:focus { border-color: var(--green); }
+
+/* Fallback alignment when native Woo blocks render outside .shop-toolbar */
+.woocommerce .woocommerce-ordering {
+  float: right;
+  margin: 0 0 1.25rem 1rem !important;
+}
+
+.woocommerce .woocommerce-result-count {
+  float: left;
+  margin: 0.4rem 0 1.25rem !important;
+}
+
+.wp-block-woocommerce-catalog-sorting,
+.wc-block-catalog-sorting {
+  display: flex !important;
+  justify-content: flex-end !important;
+  margin: 0 0 1.25rem auto !important;
+}
+
+.wp-block-woocommerce-product-results-count,
+.wc-block-product-results-count {
+  margin: 0.4rem 0 1.25rem !important;
+}
+
+.woocommerce ul.products,
+.wp-block-woocommerce-product-collection,
+.shop-product-grid {
+  clear: both;
+}
+
+/* Keep toolbar behavior unchanged where the custom wrapper exists */
+.shop-toolbar .woocommerce-ordering,
+.shop-toolbar .woocommerce-result-count {
+  float: none;
+  margin: 0 !important;
+}
 
 /* Legacy shop title classes */
 .shop-title {
@@ -890,8 +1434,8 @@ main.wp-block-group > * {
 ul.wp-block-post-template,
 .woocommerce ul.products {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 1.125rem !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.25rem !important;
   list-style: none !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -899,7 +1443,7 @@ ul.wp-block-post-template,
   box-sizing: border-box !important;
 }
 
-/* Card — compact, styled */
+/* ── PRODUCT CARD ───────────────────────────────────── */
 .wp-block-woocommerce-product-collection ul.wp-block-post-template > li,
 ul.wp-block-post-template > li.wp-block-post,
 .woocommerce ul.products li.product,
@@ -909,85 +1453,84 @@ li.product {
   min-width: 0 !important;
   list-style: none !important;
   background: #fff !important;
-  border: 0.0625rem solid #e9ecef !important;
-  border-radius: 0.75rem !important;
-  overflow: hidden !important;
+  border: 0.0625rem solid #e3e8ef !important;
+  border-radius: 1rem !important;
+  overflow: visible !important;
   display: flex !important;
   flex-direction: column !important;
   position: relative !important;
   margin: 0 !important;
-  padding: 0 !important;
-  box-shadow: 0 0.0625rem 0.25rem rgba(0,0,0,.06), 0 0.125rem 0.5rem rgba(0,0,0,.04) !important;
+  padding: 1rem !important;
+  box-shadow: 0 0.125rem 0.75rem rgba(17,24,39,.07) !important;
   transition: box-shadow .22s ease, transform .22s ease, border-color .22s ease !important;
 }
 
-/* Top accent bar */
-.wp-block-woocommerce-product-collection ul.wp-block-post-template > li::before,
-ul.wp-block-post-template > li.wp-block-post::before,
-.woocommerce ul.products li.product::before,
-li.product::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0; left: 0; right: 0 !important;
-  height: 0.1875rem !important;
-  background: linear-gradient(90deg, var(--green) 0%, #7ed957 100%) !important;
-  transform: scaleX(0) !important;
-  transform-origin: left !important;
-  transition: transform .3s ease !important;
-  z-index: 1 !important;
-  border-radius: 1rem 1rem 0 0 !important;
-}
-.wp-block-woocommerce-product-collection ul.wp-block-post-template > li:hover::before,
-ul.wp-block-post-template > li.wp-block-post:hover::before,
-.woocommerce ul.products li.product:hover::before,
-li.product:hover::before { transform: scaleX(1) !important; }
-
-/* Hover lift + glow */
+/* Hover lift */
 .wp-block-woocommerce-product-collection ul.wp-block-post-template > li:hover,
 ul.wp-block-post-template > li.wp-block-post:hover,
 .woocommerce ul.products li.product:hover,
 li.product:hover {
-  transform: translateY(-0.375rem) !important;
-  box-shadow: 0 1rem 2.5rem rgba(58,170,53,.18), 0 0.25rem 0.75rem rgba(0,0,0,.08) !important;
+  transform: translateY(-0.3rem) !important;
+  box-shadow: 0 0.75rem 2rem rgba(58,170,53,.15), 0 0.25rem 0.75rem rgba(0,0,0,.07) !important;
   border-color: var(--green) !important;
 }
 
-/* Image wrapper — zoom on hover */
+/* ── IMAGE BOX — fixed-size framed container inside the card ── */
 .wp-block-woocommerce-product-image,
 .wc-block-product-image,
-.woocommerce ul.products li.product a:first-child {
+.wc-block-components-product-image,
+.woocommerce ul.products li.product a:first-child,
+ul.wp-block-post-template > li > a:first-child {
   display: block !important;
-  overflow: hidden !important;
-  height: 10rem !important;
-  background: var(--surface) !important;
+  width: 100% !important;
+  height: var(--phase1-shop-image-h) !important;
+  min-height: var(--phase1-shop-image-h) !important;
+  max-height: var(--phase1-shop-image-h) !important;
   flex-shrink: 0 !important;
+  border: 0.0625rem solid #dde4ed !important;
+  border-radius: 0.75rem !important;
+  background: #f4f7fb !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
+
+/* Images fill the box exactly */
 .wp-block-woocommerce-product-image img,
 .wc-block-product-image img,
+.wc-block-components-product-image img,
 .woocommerce ul.products li.product a img,
-li.product a img {
+li.product a img,
+ul.wp-block-post-template > li > a:first-child img {
   width: 100% !important;
-  height: 10rem !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
   object-fit: cover !important;
-  border-radius: 0 !important;
+  object-position: center !important;
+  border-radius: 0.75rem !important;
   display: block !important;
   transition: transform .4s ease !important;
 }
+
+/* Image zoom on hover */
 .wp-block-woocommerce-product-collection ul.wp-block-post-template > li:hover img,
 ul.wp-block-post-template > li.wp-block-post:hover img,
 .woocommerce ul.products li.product:hover a img,
-li.product:hover a img { transform: scale(1.08) !important; }
+li.product:hover a img { transform: scale(1.06) !important; }
 
+/* ── TEXT AREA — sits below image box ── */
 /* Product title */
 .woocommerce-loop-product__title,
 .wp-block-woocommerce-product-title {
-  font-size: 0.9rem !important;
+  font-size: 0.95rem !important;
   font-weight: 700 !important;
   color: var(--text) !important;
-  line-height: 1.35 !important;
-  padding: 0.75rem 0.875rem 0.125rem !important;
+  line-height: 1.5 !important;
+  padding: 0.9rem 0 0.35rem !important;
+  margin: 0 !important;
   display: block !important;
-  text-align: center !important;
+  text-align: left !important;
   transition: color .2s ease !important;
 }
 .wp-block-woocommerce-product-title a { color: var(--text) !important; }
@@ -1002,12 +1545,13 @@ ul.wp-block-post-template > li.wp-block-post:hover .wp-block-woocommerce-product
 .woocommerce ul.products li.product .price,
 li.product .price {
   color: var(--green) !important;
-  font-size: 1.05rem !important;
+  font-size: 1rem !important;
   font-weight: 800 !important;
-  padding: 0.125rem 0.875rem 0.625rem !important;
   display: block !important;
-  text-align: center !important;
+  text-align: left !important;
   letter-spacing: -0.01em !important;
+  padding: 0 0 0.75rem !important;
+  margin: 0 !important;
 }
 .price del {
   color: var(--muted) !important;
@@ -1018,11 +1562,11 @@ li.product .price {
 }
 .price ins { text-decoration: none !important; }
 
-/* Add to cart — pinned bottom */
+/* ── ADD TO CART BUTTON ── */
 .wp-block-woocommerce-product-button,
 .wc-block-components-product-button {
   margin-top: auto !important;
-  padding: 0 0.875rem 1rem !important;
+  padding: 0 0 0 !important;
 }
 .woocommerce ul.products li.product .button,
 .woocommerce a.button,
@@ -1035,21 +1579,20 @@ li.product .price {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 0.25rem !important;
   width: 100% !important;
-  height: 2.25rem !important;
+  height: 2.5rem !important;
   padding: 0 !important;
-  background: linear-gradient(135deg, var(--green) 0%, var(--green-dk) 100%) !important;
+  background: var(--green) !important;
   color: #fff !important;
   border: none !important;
   border-radius: var(--r-pill) !important;
-  font-size: 0.75rem !important;
+  font-size: 0.8rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.05em !important;
   text-transform: uppercase !important;
   cursor: pointer !important;
-  transition: opacity .2s ease, transform .2s ease, box-shadow .2s ease !important;
-  box-shadow: 0 0.1875rem 0.625rem rgba(58,170,53,.28) !important;
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease !important;
+  box-shadow: 0 0.1875rem 0.75rem rgba(58,170,53,.3) !important;
 }
 .woocommerce ul.products li.product .button:hover,
 .woocommerce a.button:hover,
@@ -1058,15 +1601,15 @@ li.product .price {
 .wc-block-components-product-button__button:hover,
 .wp-block-woocommerce-product-button a:hover,
 .wp-block-woocommerce-product-button button:hover {
-  opacity: .88 !important;
+  background: var(--green-dk) !important;
   transform: translateY(-0.125rem) !important;
-  box-shadow: 0 0.375rem 1rem rgba(58,170,53,.40) !important;
+  box-shadow: 0 0.375rem 1.25rem rgba(58,170,53,.45) !important;
   color: #fff !important;
 }
-/* Classic WC */
+/* Classic WC — keep full width */
 .woocommerce ul.products li.product .button {
-  width: calc(100% - 1.5rem) !important;
-  margin: auto 0.75rem 0.875rem !important;
+  width: 100% !important;
+  margin: auto 0 0 !important;
 }
 
 /* Sorting / results */
@@ -1079,6 +1622,70 @@ li.product .price {
   color: var(--text);
   background: #fff;
   outline: none;
+}
+
+/* Shop grid gap */
+.shop-product-grid { margin-bottom: 3rem !important; }
+.shop-product-grid ul.wp-block-post-template { gap: 1.5rem !important; }
+.shop-product-grid ul.wp-block-post-template > li { align-items: flex-start !important; }
+
+/* Strict uniform product image sizing (shop grid) */
+.post-type-archive-product .shop-product-grid li.product > a:first-child,
+.post-type-archive-product .shop-product-grid li.wc-block-product > a:first-child,
+.post-type-archive-product .shop-product-grid .wp-block-woocommerce-product-image,
+.post-type-archive-product .shop-product-grid .wc-block-product-image,
+.post-type-archive-product .shop-product-grid .wc-block-components-product-image,
+.post-type-archive-product .shop-product-grid .wp-block-post-featured-image,
+.tax-product_cat .shop-product-grid li.product > a:first-child,
+.tax-product_cat .shop-product-grid li.wc-block-product > a:first-child,
+.tax-product_cat .shop-product-grid .wp-block-woocommerce-product-image,
+.tax-product_cat .shop-product-grid .wc-block-product-image,
+.tax-product_cat .shop-product-grid .wc-block-components-product-image,
+.tax-product_cat .shop-product-grid .wp-block-post-featured-image,
+.tax-product_tag .shop-product-grid li.product > a:first-child,
+.tax-product_tag .shop-product-grid li.wc-block-product > a:first-child,
+.tax-product_tag .shop-product-grid .wp-block-woocommerce-product-image,
+.tax-product_tag .shop-product-grid .wc-block-product-image,
+.tax-product_tag .shop-product-grid .wc-block-components-product-image,
+.tax-product_tag .shop-product-grid .wp-block-post-featured-image {
+  height: var(--phase1-shop-image-h) !important;
+  min-height: var(--phase1-shop-image-h) !important;
+  max-height: var(--phase1-shop-image-h) !important;
+  overflow: hidden !important;
+}
+
+.post-type-archive-product .shop-product-grid li.product > a:first-child img,
+.post-type-archive-product .shop-product-grid li.wc-block-product > a:first-child img,
+.post-type-archive-product .shop-product-grid .wp-block-woocommerce-product-image img,
+.post-type-archive-product .shop-product-grid .wc-block-product-image img,
+.post-type-archive-product .shop-product-grid .wc-block-components-product-image img,
+.post-type-archive-product .shop-product-grid .wp-block-post-featured-image img,
+.tax-product_cat .shop-product-grid li.product > a:first-child img,
+.tax-product_cat .shop-product-grid li.wc-block-product > a:first-child img,
+.tax-product_cat .shop-product-grid .wp-block-woocommerce-product-image img,
+.tax-product_cat .shop-product-grid .wc-block-product-image img,
+.tax-product_cat .shop-product-grid .wc-block-components-product-image img,
+.tax-product_cat .shop-product-grid .wp-block-post-featured-image img,
+.tax-product_tag .shop-product-grid li.product > a:first-child img,
+.tax-product_tag .shop-product-grid li.wc-block-product > a:first-child img,
+.tax-product_tag .shop-product-grid .wp-block-woocommerce-product-image img,
+.tax-product_tag .shop-product-grid .wc-block-product-image img,
+.tax-product_tag .shop-product-grid .wc-block-components-product-image img,
+.tax-product_tag .shop-product-grid .wp-block-post-featured-image img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  display: block !important;
+}
+
+/* Pagination */
+.wp-block-woocommerce-product-collection-pagination,
+.woocommerce nav.woocommerce-pagination {
+  margin-top: 1.5rem !important;
+  margin-bottom: 2.25rem !important;
 }
 
 /* Breadcrumbs */
@@ -1097,6 +1704,35 @@ li.product .price {
 .woocommerce-product-gallery__image img {
   border-radius: var(--r-md);
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.single-product .woocommerce-product-gallery__image {
+  border: 0.0625rem solid var(--border);
+  border-radius: var(--r-md);
+  background: #fff;
+  overflow: hidden;
+}
+.single-product .woocommerce div.product {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 3.5rem !important;
+  align-items: start !important;
+}
+
+.single-product .woocommerce div.product .images,
+.single-product .wp-block-woocommerce-product-image-gallery {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+.single-product .woocommerce-product-gallery__image a {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+.single-product .woocommerce-product-gallery__image img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 .woocommerce div.product p.price,
@@ -1105,15 +1741,111 @@ li.product .price {
   font-weight: 800;
   color: var(--green);
   margin: 0.75rem 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.85rem;
+  border: 0.09375rem solid #b9e2b5;
+  border-radius: var(--r-pill);
+  background: #eff9ed;
 }
 .single-product-price-note { font-size: var(--fs-sm); color: var(--muted); font-style: italic; }
+.single-product .woocommerce div.product .summary,
+.single-product .woocommerce div.product .summary *:not(.button) {
+  text-align: left !important;
+}
+.single-product .woocommerce div.product .summary h1,
+.single-product .woocommerce div.product .summary .product_title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 1.25rem !important;
+}
+.single-product .woocommerce div.product .summary p,
+.single-product .woocommerce div.product .woocommerce-product-details__short-description,
+.single-product .woocommerce div.product .woocommerce-product-details__short-description p {
+  font-size: 1.05rem !important;
+  line-height: 1.85 !important;
+  margin-bottom: 1.5rem !important;
+  color: var(--muted) !important;
+}
+.single-product .woocommerce div.product .summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 1rem;
+}
+.single-product .woocommerce div.product p.price,
+.single-product .woocommerce div.product span.price {
+  font-size: var(--fs-2xl) !important;
+  margin: 0 0 1.75rem !important;
+  padding: 0.5rem 1.25rem !important;
+}
+.single-product .single-product-price-note {
+  margin: 0 0 1rem !important;
+  line-height: 1.75 !important;
+}
+.single-product .woocommerce div.product form.cart {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-top: 0.15rem !important;
+}
+.single-product .woocommerce div.product form.cart .quantity {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: #fff;
+  border: 0.0625rem solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 0.25rem;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.05);
+  height: 2.75rem;
+}
+.single-product .woocommerce div.product form.cart .phase1-qty-control {
+  width: 2.25rem;
+  min-width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 999px;
+  background: #eef8eb;
+  color: var(--green-dk);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 !important;
+  flex-shrink: 0;
+  appearance: none;
+  transition: background var(--t), color var(--t), transform var(--t);
+}
+.single-product .woocommerce div.product form.cart .phase1-qty-control:hover {
+  background: var(--green);
+  color: #fff;
+  transform: scale(1.08);
+}
 .woocommerce div.product form.cart .qty {
-  border: 0.09375rem solid var(--border);
-  border-radius: var(--r-sm);
-  padding: 0.625rem 0.875rem;
-  width: 4.5rem;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  width: 3rem;
+  min-width: 3rem;
+  height: 2.25rem;
   font-size: var(--fs-base);
+  font-weight: 700;
   text-align: center;
+  background: transparent;
+  line-height: 2.25rem;
+  outline: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.woocommerce div.product form.cart .qty::-webkit-outer-spin-button,
+.woocommerce div.product form.cart .qty::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .woocommerce div.product form.cart .single_add_to_cart_button {
   background: var(--green) !important;
@@ -2047,6 +2779,7 @@ a.contact-info-value:hover { color: var(--green); }
   /* Cart — stacked on tablet (handled by cart responsive block above) */
   /* Single product */
   .woocommerce div.product .wp-block-columns { flex-direction: column !important; }
+  .single-product .woocommerce div.product { grid-template-columns: 1fr !important; gap: 2rem !important; }
   /* Hero */
   .home-hero { padding: 2.5rem 1.5rem !important; }
   .home-hero-title { font-size: 1.75rem; }
@@ -2079,3 +2812,76 @@ a.contact-info-value:hover { color: var(--green); }
   position: absolute; width: 0.0625rem; height: 0.0625rem;
   overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap;
 }
+
+/* =========================================================
+   RECIPE TOP - FINAL FORCE OVERRIDE
+   ========================================================= */
+.single .single-recipe-layout .recipe-top,
+.single-post .single-recipe-layout .recipe-top {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  justify-content: space-between !important;
+  gap: 2rem !important;
+  flex-wrap: nowrap !important;
+}
+
+.single .single-recipe-layout .recipe-top-content,
+.single-post .single-recipe-layout .recipe-top-content {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 22rem) !important;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image {
+  flex: 0 0 20rem !important;
+  width: 20rem !important;
+  height: 20rem !important;
+  margin-left: auto !important;
+  margin-bottom: 0 !important;
+  padding: 0.4rem !important;
+  border: 0.125rem solid var(--green) !important;
+  border-radius: var(--r-lg) !important;
+  background: #fff !important;
+  box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease !important;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image img,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  border-radius: calc(var(--r-lg) - 0.25rem) !important;
+}
+
+.single .single-recipe-layout .recipe-top .single-recipe-image:hover,
+.single-post .single-recipe-layout .recipe-top .single-recipe-image:hover {
+  transform: translateY(-0.25rem) !important;
+  border-color: var(--green) !important;
+  box-shadow: 0 1rem 2.2rem rgba(0, 0, 0, 0.16) !important;
+}
+
+@media (max-width: 47.9375rem) {
+  .single .single-recipe-layout .recipe-top,
+  .single-post .single-recipe-layout .recipe-top {
+    flex-direction: column !important;
+  }
+
+  .single .single-recipe-layout .recipe-top-content,
+  .single-post .single-recipe-layout .recipe-top-content {
+    max-width: 100% !important;
+  }
+
+  .single .single-recipe-layout .recipe-top .single-recipe-image,
+  .single-post .single-recipe-layout .recipe-top .single-recipe-image {
+    width: 100% !important;
+    height: auto !important;
+    flex: none !important;
+  }
+}
+

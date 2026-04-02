@@ -1,12 +1,22 @@
 <?php
 
 function phase1_load_styles() {
-wp_enqueue_style(
-    'phase1-style',
-    get_stylesheet_uri(),
-    array(),
-    wp_get_theme()->get('Version')
-);
+  $style_path = get_stylesheet_directory() . '/style.css';
+  $style_version = file_exists($style_path) ? filemtime($style_path) : wp_get_theme()->get('Version');
+
+  wp_enqueue_style(
+      'phase1-google-fonts',
+      'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;700&display=swap',
+      array(),
+      null
+  );
+
+  wp_enqueue_style(
+      'phase1-style',
+      get_stylesheet_uri(),
+      array('phase1-google-fonts'),
+      $style_version
+  );
 }
 add_action('wp_enqueue_scripts', 'phase1_load_styles');
 
@@ -82,6 +92,75 @@ document.addEventListener('DOMContentLoaded', function () {
 <?php
 }
 add_action('wp_footer', 'phase1_cart_quantity_autoupdate_script', 30);
+
+function phase1_single_product_quantity_controls_script() {
+if (!is_product()) {
+    return;
+}
+?>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var forms = document.querySelectorAll('form.cart');
+
+    forms.forEach(function (form) {
+        var quantityWrap = form.querySelector('.quantity');
+        var qtyInput = quantityWrap ? quantityWrap.querySelector('input.qty') : null;
+
+        if (!quantityWrap || !qtyInput || quantityWrap.querySelector('.phase1-qty-control')) {
+            return;
+        }
+
+        var minusBtn = document.createElement('button');
+        minusBtn.type = 'button';
+        minusBtn.className = 'phase1-qty-control phase1-qty-minus';
+        minusBtn.setAttribute('aria-label', 'Decrease quantity');
+        minusBtn.textContent = '-';
+
+        var plusBtn = document.createElement('button');
+        plusBtn.type = 'button';
+        plusBtn.className = 'phase1-qty-control phase1-qty-plus';
+        plusBtn.setAttribute('aria-label', 'Increase quantity');
+        plusBtn.textContent = '+';
+
+        quantityWrap.insertBefore(minusBtn, qtyInput);
+        quantityWrap.appendChild(plusBtn);
+
+        function getStep() {
+            var step = parseFloat(qtyInput.step);
+            return Number.isFinite(step) && step > 0 ? step : 1;
+        }
+
+        function getMin() {
+            var min = parseFloat(qtyInput.min);
+            return Number.isFinite(min) ? min : 1;
+        }
+
+        function getMax() {
+            var max = parseFloat(qtyInput.max);
+            return Number.isFinite(max) ? max : Infinity;
+        }
+
+        function updateQty(direction) {
+            var current = parseFloat(qtyInput.value);
+
+            if (!Number.isFinite(current)) {
+                current = getMin();
+            }
+
+            var next = current + (direction * getStep());
+            next = Math.max(getMin(), Math.min(getMax(), next));
+            qtyInput.value = String(next);
+            qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        minusBtn.addEventListener('click', function () { updateQty(-1); });
+        plusBtn.addEventListener('click', function () { updateQty(1); });
+    });
+});
+</script>
+<?php
+}
+add_action('wp_footer', 'phase1_single_product_quantity_controls_script', 31);
 
 function phase1_get_cart_link_markup() {
     $count = 0;
