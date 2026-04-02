@@ -2921,8 +2921,8 @@ div.wp-block-group.legal-page--terms {
    FOOTER
 ═══════════════════════════════════════════════════════ */
 .phase1-footer {
-  background: #2d1a0e !important;
-  color: #f5dcc8 !important;
+  background: #3d2510 !important;
+  color: #f0e0cc !important;
   padding: 0 !important;
   max-width: none !important;
   width: 100% !important;
@@ -2966,7 +2966,7 @@ div.wp-block-group.legal-page--terms {
   font-weight: 600 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
-  color: var(--green) !important;
+  color: #fcd9a0 !important;
   margin-bottom: 0.875rem !important;
   padding-bottom: 0.5rem !important;
   border-bottom: 0.0625rem solid rgba(255,200,150,.15) !important;
@@ -2978,7 +2978,7 @@ div.wp-block-group.legal-page--terms {
   align-items: center !important;
 }
 .phase1-footer-links ul li a {
-  color: #94a3b8 !important;
+  color: #e8c99a !important;
   font-size: 0.875rem !important;
   line-height: 1.5 !important;
   display: block !important;
@@ -3000,9 +3000,9 @@ div.wp-block-group.legal-page--terms {
   justify-content: center !important;
   text-align: center !important;
 }
-.phase1-footer-bottom p { color: #64748b !important; font-size: var(--fs-sm) !important; }
+.phase1-footer-bottom p { color: #c9a97a !important; font-size: var(--fs-sm) !important; }
 .phase1-footer-disclaimer {
-  color: #475569 !important;
+  color: #a87d52 !important;
   font-size: var(--fs-xs) !important;
   text-align: center !important;
   padding: 0.5rem 0 1.25rem !important;
@@ -3300,12 +3300,6 @@ ul.wp-block-post-template > li:hover .wp-block-post-title,
 ul.wp-block-post-template > li:hover h2,
 ul.wp-block-post-template > li:hover h3 {
   color: var(--amber-dk) !important;
-}
-
-/* Blog page heading */
-.blog .wp-block-post-title,
-.home .wp-block-heading {
-  color: var(--navy) !important;
 }
 
 /* ── Contact page ── */
@@ -3630,11 +3624,10 @@ blockquote, .wp-block-quote {
 }
 
 /* ═══════════════════════════════════════════════════════
-   FRESH GARDEN SALAD BOWL — postid-124
-   Distinct title style: earthy teal-green gradient
+   ALL RECIPE PAGES — Playfair italic green gradient title
 ═══════════════════════════════════════════════════════ */
-.postid-124 h2.wp-block-post-title,
-.postid-124 h1.wp-block-post-title {
+.single-recipes h2.wp-block-post-title,
+.single-recipes h1.wp-block-post-title {
   font-family: 'Playfair Display', Georgia, serif !important;
   font-weight: 900 !important;
   font-style: italic !important;
@@ -3651,4 +3644,24 @@ blockquote, .wp-block-quote {
   padding: 0 !important;
   display: inline !important;
   position: relative !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RECIPE PAGE — content box with margin
+═══════════════════════════════════════════════════════ */
+.single-recipes .entry-content.wp-block-post-content {
+  max-width: 52rem !important;
+  margin: 1.5rem auto 3rem !important;
+  background: #ffffff !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-top: 3px solid var(--green) !important;
+  border-radius: var(--r-lg) !important;
+  padding: 2.25rem 2.75rem !important;
+  box-shadow: 0 0.25rem 1.25rem rgba(0,0,0,0.06) !important;
+}
+
+.single-recipes .entry-content.wp-block-post-content:hover {
+  box-shadow: 0 0.5rem 2rem rgba(58,170,53,0.1) !important;
+  border-color: var(--green-mid) !important;
+  border-top-color: var(--green) !important;
 }
