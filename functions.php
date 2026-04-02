@@ -1,12 +1,18 @@
 <?php
 
+function phase1_legal_back_button() {
+  if ( ! is_page( array( 'privacy-policy', 'terms-and-conditions', 3, 66 ) ) ) return;
+  echo '<a href="' . esc_url( wc_get_page_permalink( 'myaccount' ) ) . '" class="phase1-back-btn" aria-label="Back to Account">&#8592; Back to Account</a>';
+}
+add_action( 'wp_body_open', 'phase1_legal_back_button' );
+
 function phase1_load_styles() {
   $style_path = get_stylesheet_directory() . '/style.css';
   $style_version = file_exists($style_path) ? filemtime($style_path) : wp_get_theme()->get('Version');
 
   wp_enqueue_style(
       'phase1-google-fonts',
-      'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Lato:wght@400;700&display=swap',
+      'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lato:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;500;600;700&display=swap',
       array(),
       null
   );

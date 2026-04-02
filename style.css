@@ -26,6 +26,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
   --surface:    #f9fafb;
   --dark:       #111827;
 
+  /* Extended palette */
+  --amber:      #f59e0b;
+  --amber-dk:   #d97706;
+  --amber-lt:   #fffbeb;
+  --amber-mid:  #fde68a;
+  --navy:       #1e3a5f;
+  --navy-lt:    #e8eef6;
+  --coral:      #ef6c4a;
+  --coral-lt:   #fdf0ec;
+  --teal:       #0d9488;
+  --teal-lt:    #e6f7f6;
+  --surface-2:  #f3f4f6;
+
   /* Radii */
   --r-sm:   0.375rem;
   --r-md:   0.75rem;
@@ -64,7 +77,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
   --phase1-shop-image-h: 13rem;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 17.5px; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
                Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
@@ -176,7 +189,7 @@ main.wp-block-group {
   align-items: center;
   gap: 0.75rem;
   padding: 0.75rem 1.25rem;
-  font-size: var(--fs-sm);
+  font-size: 1.08rem;
   font-weight: 600;
   color: var(--muted);
   border-left: 0.1875rem solid transparent;
@@ -210,9 +223,9 @@ main.wp-block-group {
   left: 0 !important;
   right: 0 !important;
   z-index: 1100 !important;
-  background: #fff !important;
-  border-bottom: 0.0625rem solid var(--border) !important;
-  box-shadow: var(--sh-sm) !important;
+  background: linear-gradient(180deg, #eef8eb 0%, #f7faf7 100%) !important;
+  border-bottom: 2px solid var(--green) !important;
+  box-shadow: 0 2px 12px rgba(58,170,53,0.1), 0 1px 3px rgba(0,0,0,0.06) !important;
   padding: 0 !important;
   max-width: none !important;
   width: 100% !important;
@@ -400,7 +413,7 @@ main.wp-block-group {
    TYPOGRAPHY
 ═══════════════════════════════════════════════════════ */
 h1 { font-size: var(--fs-2xl); font-weight: 800; line-height: 1.2; }
-h2 { font-size: var(--fs-xl);  font-weight: 800; line-height: 1.25; }
+h2 { font-size: 1.85rem;  font-weight: 800; line-height: 1.25; }
 h3 { font-size: var(--fs-md);  font-weight: 700; line-height: 1.3; }
 h4, h5, h6 { font-size: var(--fs-base); font-weight: 700; }
 p { font-size: var(--fs-base); color: var(--text); }
@@ -568,6 +581,9 @@ main.wp-block-group > * {
   color: var(--muted) !important;
   line-height: 1.65 !important;
   flex: 1;
+  text-align: center;
+  padding-right: .4rem;
+  padding-left: .4rem;
 }
 .category-card a {
   color: var(--green);
@@ -1581,7 +1597,7 @@ li.product .price {
   justify-content: center !important;
   width: 100% !important;
   height: 2.5rem !important;
-  padding: 0 !important;
+  padding: .6rem !important;
   background: var(--green) !important;
   color: #fff !important;
   border: none !important;
@@ -1938,8 +1954,8 @@ li.product .price {
 
 /* Fallback: WC shortcode .woocommerce wrapper */
 .woocommerce-cart .woocommerce,
-.woocommerce-page .woocommerce {
-  display: flex !important;
+.woocommerce-cart.woocommerce-page .woocommerce {
+  display: grid !important;
   align-items: flex-start !important;
   gap: 1.75rem !important;
   flex-wrap: nowrap !important;
@@ -2159,6 +2175,27 @@ li.product .price {
 ═══════════════════════════════════════════════════════ */
 .account-page-subtitle { color: var(--muted); margin-bottom: 1.25rem; font-size: var(--fs-sm); }
 
+.woocommerce-account main.wp-block-group {
+  padding-top: 1rem !important;
+}
+
+.woocommerce-account .section-divider,
+.woocommerce-account .wp-block-separator {
+  margin: 0.75rem 0 1rem !important;
+}
+
+.woocommerce-account .woocommerce-notices-wrapper:empty {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.woocommerce-account .woocommerce,
+.woocommerce-account .woocommerce-MyAccount-navigation,
+.woocommerce-account .woocommerce-MyAccount-content {
+  margin-top: 0 !important;
+}
+
 /* Two-column layout: sidebar nav + content */
 .woocommerce-account .woocommerce {
   display: flex;
@@ -2200,6 +2237,154 @@ li.product .price {
 .woocommerce-MyAccount-navigation ul li a:hover {
   background: var(--green-lt);
   color: var(--green);
+}
+
+.woocommerce-account .woocommerce-MyAccount-content > p {
+  text-align: left !important;
+  margin-bottom: 1rem !important;
+}
+
+.woocommerce-account .woocommerce-Addresses {
+  display: flex !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.woocommerce-account .woocommerce-Address {
+  text-align: left !important;
+  background: #fff !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  padding: 1rem 1.1rem !important;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.05) !important;
+}
+
+.woocommerce-account .woocommerce-Address-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 0.0625rem solid var(--border);
+}
+
+.woocommerce-account .woocommerce-Address-title h3 {
+  margin: 0 !important;
+  font-size: 1.35rem !important;
+  text-align: left !important;
+}
+
+.woocommerce-account .woocommerce-Address-title .edit,
+.woocommerce-account .woocommerce-Address-title a {
+  font-family: var(--font-ui, inherit) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--green) !important;
+  text-decoration: underline;
+}
+
+.woocommerce-account .woocommerce-Address address {
+  margin: 0 !important;
+  text-align: left !important;
+  font-style: normal;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+@media (max-width: 48rem) {
+  .woocommerce-account .woocommerce-Addresses {
+    grid-template-columns: 1fr;
+  }
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm {
+  background: #fff !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  padding: 1.25rem 1.25rem 1.4rem !important;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.05) !important;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm .form-row {
+  margin-bottom: 1rem !important;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm label {
+  display: block;
+  text-align: left !important;
+  font-family: var(--font-ui, inherit) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  color: var(--navy) !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm .required {
+  color: #dc2626;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm input[type="text"],
+.woocommerce-account form.woocommerce-EditAccountForm input[type="email"],
+.woocommerce-account form.woocommerce-EditAccountForm input[type="password"] {
+  width: 100% !important;
+  min-height: 3rem !important;
+  border: 0.09375rem solid #cfd7e2 !important;
+  border-radius: var(--r-sm) !important;
+  padding: 0.75rem 0.9rem !important;
+  background: #fff !important;
+  color: var(--text) !important;
+  box-shadow: none !important;
+  transition: border-color 200ms ease, box-shadow 200ms ease !important;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm input[type="text"]:focus,
+.woocommerce-account form.woocommerce-EditAccountForm input[type="email"]:focus,
+.woocommerce-account form.woocommerce-EditAccountForm input[type="password"]:focus {
+  border-color: var(--green) !important;
+  box-shadow: 0 0 0 0.1875rem rgba(58,170,53,.14) !important;
+  outline: none !important;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm span em {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-align: left;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm fieldset {
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-sm) !important;
+  padding: 0.9rem 0.9rem 0.25rem !important;
+  margin-top: 1rem !important;
+  background: var(--surface) !important;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm fieldset legend {
+  text-align: left !important;
+  font-family: var(--font-ui, inherit) !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: var(--navy) !important;
+  padding: 0 0.35rem;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm .password-input {
+  width: 100%;
+}
+
+.woocommerce-account form.woocommerce-EditAccountForm button[type="submit"] {
+  margin-top: 0.75rem !important;
+}
+
+@media (max-width: 48rem) {
+  .woocommerce-account form.woocommerce-EditAccountForm {
+    padding: 1rem !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -2614,7 +2799,7 @@ a.contact-info-value:hover { color: var(--green); }
   background: #fff !important;
   border: 0.0625rem solid var(--border) !important;
   border-radius: var(--r-md) !important;
-  padding: 2rem 2.25rem !important;
+  /* padding: 2rem 2.75rem !important; */
   box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.05) !important;
   transition: box-shadow .25s ease, border-color .25s ease !important;
 }
@@ -2624,9 +2809,17 @@ a.contact-info-value:hover { color: var(--green); }
   border-color: var(--green) !important;
 }
 
+@media (max-width: 48rem) {
+  .legal-page .wp-block-post-content,
+  .legal-page > .entry-content,
+  .legal-page [class*="is-layout"] {
+    padding: 1.5rem 1.25rem !important;
+  }
+}
+
 /* Typography inside legal content */
 .legal-page h2 {
-  font-size: var(--fs-lg) !important;
+  font-size: 1.5rem !important;
   font-weight: 800 !important;
   color: var(--text) !important;
   margin: 1.75rem 0 0.625rem !important;
@@ -2663,86 +2856,156 @@ a.contact-info-value:hover { color: var(--green); }
 }
 .legal-page a:hover { color: var(--green-dk) !important; }
 
+/* ── Terms page — match privacy layout exactly ── */
+
+/* Title banner — same green box as privacy */
+.page-id-66 h1.wp-block-post-title,
+.page-id-66 .page-title {
+  font-size: clamp(1.5rem, 3vw, var(--fs-2xl)) !important;
+  font-weight: 900 !important;
+  text-align: left !important;
+  background: linear-gradient(135deg, #eef8eb 0%, #f4fbf0 60%, #fff 100%) !important;
+  border: 0.0625rem solid var(--green-mid) !important;
+  border-left: 0.25rem solid var(--green) !important;
+  border-radius: var(--r-md) !important;
+  padding: 1.5rem 2rem !important;
+  margin-bottom: 2rem !important;
+  color: var(--text) !important;
+  max-width: 52rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Constrain terms content same as privacy */
+.page-id-66 .entry-content,
+.page-id-66 .wp-block-post-content {
+  max-width: 52rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 2rem 4rem !important;
+}
+
+/* Content box wrapper — same card as privacy */
+.legal-page--terms {
+  background: #fff !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-md) !important;
+  padding: 2.5rem 3rem !important;
+  box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,.05) !important;
+  transition: box-shadow .25s ease, border-color .25s ease !important;
+  /* override WP global padding */
+  --wp--style--root--padding-left: 0px !important;
+  --wp--style--root--padding-right: 0px !important;
+}
+
+/* Force padding — override WP block theme inline style */
+div.legal-page--terms.has-global-padding.is-layout-constrained,
+div.wp-block-group.legal-page--terms {
+  padding: 2.5rem 3rem !important;
+}
+
+/* prevent nested constrained blocks from re-adding side padding */
+.legal-page--terms .is-layout-constrained > *,
+.legal-page--terms .has-global-padding > * {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  max-width: none !important;
+}
+
+.legal-page--terms:hover {
+  box-shadow: 0 0.375rem 1.5rem rgba(58,170,53,.10) !important;
+  border-color: var(--green) !important;
+}
+
 /* ═══════════════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════════════ */
 .phase1-footer {
-  background: #111827 !important;
-  color: #d1d5db !important;
+  background: #2d1a0e !important;
+  color: #f5dcc8 !important;
   padding: 0 !important;
   max-width: none !important;
   width: 100% !important;
-  margin-top: 2.5rem !important;
+  margin-top: 2rem !important;
+  border-top: 3px solid var(--green) !important;
   border-top-left-radius: var(--r-lg) !important;
   border-top-right-radius: var(--r-lg) !important;
-  border: 0.0625rem solid #1f2937 !important;
-  border-bottom: none !important;
   overflow: hidden !important;
 }
 .phase1-footer-inner {
   max-width: var(--wrap) !important;
   margin: 0 auto !important;
-  padding: 3.75rem 2.5rem 0 !important;
+  padding: 2.25rem 2.5rem 0 !important;
 }
 .phase1-footer-top {
   display: flex !important;
   align-items: flex-start !important;
-  gap: 3rem !important;
+  gap: 1.5rem !important;
 }
 .phase1-footer-top > .wp-block-column {
   flex: 1 1 0% !important;
   min-width: 0 !important;
 }
 .phase1-footer-links {
-  background: rgba(255,255,255,.03) !important;
-  border: 0.0625rem solid #263244 !important;
+  background: rgba(255,255,255,.04) !important;
+  border: 0.0625rem solid rgba(255,200,150,.12) !important;
+  border-top: 2px solid var(--amber) !important;
   border-radius: var(--r-md) !important;
-  padding: 1.25rem 1.25rem 1.1rem !important;
+  padding: 1rem 1.25rem 0.9rem !important;
   text-align: center !important;
+  transition: border-color 200ms ease, background 200ms ease !important;
+}
+.phase1-footer-links:hover {
+  background: rgba(255,255,255,.07) !important;
+  border-color: rgba(255,200,150,.25) !important;
+  border-top-color: var(--green) !important;
 }
 .phase1-footer-links h3 {
-  font-size: var(--fs-base) !important;
-  font-weight: 700 !important;
-  color: #fff !important;
-  margin-bottom: 1.25rem !important;
-  padding-bottom: 0.625rem !important;
-  border-bottom: 0.125rem solid #334155 !important;
+  font-family: var(--font-ui) !important;
+  font-size: var(--fs-sm) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: var(--green) !important;
+  margin-bottom: 0.875rem !important;
+  padding-bottom: 0.5rem !important;
+  border-bottom: 0.0625rem solid rgba(255,200,150,.15) !important;
 }
 .phase1-footer-links ul {
   display: flex !important;
   flex-direction: column !important;
-  gap: 0.625rem !important;
+  gap: 0.3rem !important;
   align-items: center !important;
 }
 .phase1-footer-links ul li a {
-  color: #9ca3af !important;
-  font-size: var(--fs-sm) !important;
+  color: #94a3b8 !important;
+  font-size: 0.875rem !important;
   line-height: 1.5 !important;
   display: block !important;
   border-radius: var(--r-sm) !important;
-  padding: 0.25rem 0.4rem !important;
-  transition: color var(--t), background var(--t) !important;
+  padding: 0.2rem 0.5rem !important;
+  transition: color 180ms ease, background 180ms ease !important;
   text-align: center !important;
 }
 .phase1-footer-links ul li a:hover {
-  color: #d1fae5 !important;
-  background: rgba(58,170,53,.18) !important;
+  color: #ffffff !important;
+  background: rgba(58,170,53,.15) !important;
 }
 .phase1-footer-bottom {
-  margin-top: 3.25rem !important;
-  padding: 1.25rem 0 !important;
-  border-top: 0.0625rem solid #374151 !important;
-  color: #6b7280 !important;
+  margin-top: 1.75rem !important;
+  padding: 1rem 0 !important;
+  border-top: 0.0625rem solid rgba(255,200,150,.1) !important;
+  color: #64748b !important;
   font-size: var(--fs-sm) !important;
   justify-content: center !important;
   text-align: center !important;
 }
-.phase1-footer-bottom p { color: #6b7280 !important; font-size: var(--fs-sm) !important; }
+.phase1-footer-bottom p { color: #64748b !important; font-size: var(--fs-sm) !important; }
 .phase1-footer-disclaimer {
-  color: #4b5563 !important;
+  color: #475569 !important;
   font-size: var(--fs-xs) !important;
   text-align: center !important;
-  padding: 0.625rem 0 1.75rem !important;
+  padding: 0.5rem 0 1.25rem !important;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -2885,3 +3148,507 @@ a.contact-info-value:hover { color: var(--green); }
   }
 }
 
+/* ═══════════════════════════════════════════════════════
+   SITEWIDE COLOUR ENHANCEMENT
+   Amber accent · Navy depth · Coral highlights · Teal touches
+═══════════════════════════════════════════════════════ */
+
+/* ── Sidebar nav ── */
+.phase1-nav {
+  background: linear-gradient(180deg, #0f2a1e 0%, #1a3a28 60%, #0f2a1e 100%) !important;
+  border-right: 1px solid rgba(58,170,53,0.2) !important;
+}
+
+.phase1-nav a {
+  color: #d1e8cc !important;
+}
+
+.phase1-nav a:hover,
+.phase1-nav .current-menu-item a,
+.phase1-nav li.current_page_item a {
+  color: #ffffff !important;
+  background: rgba(58,170,53,0.18) !important;
+  border-radius: var(--r-sm) !important;
+}
+
+.phase1-nav .nav-icon {
+  filter: brightness(0) invert(0.7) !important;
+}
+
+.phase1-nav a:hover .nav-icon,
+.phase1-nav .current-menu-item .nav-icon {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* ── Top header bar ── */
+.phase1-topbar,
+header.wp-block-template-part {
+  background: #ffffff !important;
+  border-bottom: 2px solid var(--green-lt) !important;
+  box-shadow: 0 2px 12px rgba(30,58,95,0.07) !important;
+}
+
+/* ── Page headings (h1, h2 on non-recipe pages) ── */
+.wp-block-post-title:not(.single-recipes .wp-block-post-title),
+.entry-title,
+.page-title {
+  color: var(--navy) !important;
+}
+
+h2.wp-block-heading,
+h3.wp-block-heading {
+  color: var(--navy) !important;
+}
+
+/* ── Home hero section ── */
+.home-hero {
+  background: linear-gradient(135deg, #eef8eb 0%, #e8eef6 100%) !important;
+  border-radius: var(--r-lg) !important;
+  border: 1px solid var(--green-mid) !important;
+}
+
+/* ── "Why Us" / feature cards ── */
+.feature-card:nth-child(1) {
+  border-top: 3px solid var(--green) !important;
+  background: linear-gradient(160deg, #ffffff, var(--green-lt)) !important;
+}
+
+.feature-card:nth-child(2) {
+  border-top: 3px solid var(--amber) !important;
+  background: linear-gradient(160deg, #ffffff, var(--amber-lt)) !important;
+}
+
+.feature-card:nth-child(2) h3 {
+  color: var(--amber-dk) !important;
+}
+
+.feature-card:nth-child(3) {
+  border-top: 3px solid var(--teal) !important;
+  background: linear-gradient(160deg, #ffffff, var(--teal-lt)) !important;
+}
+
+.feature-card:nth-child(3) h3 {
+  color: var(--teal) !important;
+}
+
+.feature-card {
+  transition: transform 220ms ease, box-shadow 220ms ease !important;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: var(--sh-lg) !important;
+}
+
+/* ── Shop product cards ── */
+.woocommerce ul.products li.product,
+li.product,
+.wp-block-woocommerce-product-collection ul.wp-block-post-template > li {
+  border-radius: var(--r-md) !important;
+  border: 1.5px solid var(--border) !important;
+  background: #ffffff !important;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease !important;
+  overflow: hidden !important;
+}
+
+.woocommerce ul.products li.product:nth-child(3n+1),
+li.product:nth-child(3n+1) {
+  border-top: 3px solid var(--green) !important;
+}
+
+.woocommerce ul.products li.product:nth-child(3n+2),
+li.product:nth-child(3n+2) {
+  border-top: 3px solid var(--amber) !important;
+}
+
+.woocommerce ul.products li.product:nth-child(3n+3),
+li.product:nth-child(3n+3) {
+  border-top: 3px solid var(--teal) !important;
+}
+
+/* ADD TO CART button — amber on hover for contrast */
+.woocommerce ul.products li.product .button:hover,
+.wp-block-button__link:hover,
+a.add_to_cart_button:hover,
+button.add_to_cart_button:hover {
+  background: var(--amber-dk) !important;
+  border-color: var(--amber-dk) !important;
+  box-shadow: 0 4px 14px rgba(245,158,11,0.35) !important;
+}
+
+/* ── Blog cards ── */
+.wp-block-post-template li.wp-block-post,
+.blog-card,
+ul.wp-block-post-template > li {
+  border-radius: var(--r-md) !important;
+  border: 1.5px solid var(--border) !important;
+  background: #ffffff !important;
+  overflow: hidden !important;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease !important;
+}
+
+.wp-block-post-template li.wp-block-post:hover,
+ul.wp-block-post-template > li:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 30px rgba(30,58,95,0.12) !important;
+  border-color: var(--amber-mid) !important;
+}
+
+/* Blog post title on hover — amber */
+.wp-block-post-template li.wp-block-post:hover .wp-block-post-title a,
+ul.wp-block-post-template > li:hover .wp-block-post-title,
+ul.wp-block-post-template > li:hover h2,
+ul.wp-block-post-template > li:hover h3 {
+  color: var(--amber-dk) !important;
+}
+
+/* Blog page heading */
+.blog .wp-block-post-title,
+.home .wp-block-heading {
+  color: var(--navy) !important;
+}
+
+/* ── Contact page ── */
+.contact-card,
+.wp-block-group:has(.contact-card) {
+  border-radius: var(--r-lg) !important;
+}
+
+/* Contact info card — navy tinted */
+.contact-card:first-of-type,
+.page-contact .wp-block-group > .wp-block-group:first-of-type {
+  background: linear-gradient(135deg, var(--navy-lt), #ffffff) !important;
+  border-left: 4px solid var(--navy) !important;
+}
+
+/* Contact form card — amber tinted */
+.contact-card:last-of-type,
+.page-contact .wp-block-group > .wp-block-group:last-of-type {
+  background: linear-gradient(135deg, var(--amber-lt), #ffffff) !important;
+  border-left: 4px solid var(--amber) !important;
+}
+
+/* Contact form inputs focus */
+.wpcf7 input:focus,
+.wpcf7 textarea:focus,
+.wpcf7 select:focus {
+  border-color: var(--amber) !important;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.15) !important;
+  outline: none !important;
+}
+
+/* Contact submit button — amber */
+.wpcf7 input[type="submit"],
+.wpcf7 .wpcf7-submit {
+  background: var(--amber) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: var(--r-pill) !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  transition: background 220ms ease, box-shadow 220ms ease, transform 220ms ease !important;
+  cursor: pointer !important;
+}
+
+.wpcf7 input[type="submit"]:hover,
+.wpcf7 .wpcf7-submit:hover {
+  background: var(--amber-dk) !important;
+  box-shadow: 0 6px 18px rgba(245,158,11,0.35) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ── Cart page ── */
+.woocommerce-cart-form {
+  border-radius: var(--r-lg) !important;
+  border: 1.5px solid var(--border) !important;
+  background: #ffffff !important;
+}
+
+.woocommerce-cart-form thead {
+  background: var(--navy) !important;
+  color: #ffffff !important;
+}
+
+.woocommerce-cart-form thead th {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+  font-size: var(--fs-xs) !important;
+  text-transform: uppercase !important;
+}
+
+.cart_totals {
+  border-radius: var(--r-lg) !important;
+  border: 1.5px solid var(--amber-mid) !important;
+  background: linear-gradient(160deg, var(--amber-lt), #ffffff) !important;
+}
+
+.cart_totals h2 {
+  color: var(--navy) !important;
+}
+
+/* Proceed to checkout — navy */
+.wc-proceed-to-checkout .checkout-button,
+a.checkout-button {
+  background: var(--navy) !important;
+  border-color: var(--navy) !important;
+  transition: background 220ms ease, box-shadow 220ms ease, transform 220ms ease !important;
+}
+
+.wc-proceed-to-checkout .checkout-button:hover,
+a.checkout-button:hover {
+  background: #162d4a !important;
+  box-shadow: 0 6px 20px rgba(30,58,95,0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ── Page section headings decoration ── */
+.wp-block-heading.has-text-align-center,
+h2.wp-block-heading {
+  position: relative !important;
+}
+
+/* ── Footer ── */
+footer.wp-block-template-part,
+.wp-block-template-part[data-slug="footer"],
+footer {
+  background: linear-gradient(180deg, #0f2a1e 0%, #0a1f15 100%) !important;
+  color: #c8e6c0 !important;
+  border-top: 3px solid var(--green) !important;
+}
+
+footer h2, footer h3, footer h4,
+footer .wp-block-heading {
+  color: #ffffff !important;
+}
+
+footer a {
+  color: #a3d99a !important;
+  transition: color 200ms ease !important;
+}
+
+footer a:hover {
+  color: var(--amber) !important;
+}
+
+footer p, footer li {
+  color: #9dbf95 !important;
+}
+
+/* ── Breadcrumb ── */
+.woocommerce-breadcrumb,
+.breadcrumb {
+  background: var(--navy-lt) !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--r-sm) !important;
+  font-size: var(--fs-sm) !important;
+  color: var(--navy) !important;
+  display: inline-block !important;
+}
+
+.woocommerce-breadcrumb a {
+  color: var(--navy) !important;
+  font-weight: 600 !important;
+}
+
+.woocommerce-breadcrumb a:hover {
+  color: var(--amber-dk) !important;
+}
+
+/* ── Coupon / update cart buttons ── */
+.woocommerce .coupon .button,
+.woocommerce button[name="apply_coupon"] {
+  background: var(--teal) !important;
+  border-color: var(--teal) !important;
+  color: #ffffff !important;
+  transition: background 220ms ease, box-shadow 220ms ease !important;
+}
+
+.woocommerce .coupon .button:hover,
+.woocommerce button[name="apply_coupon"]:hover {
+  background: var(--teal) !important;
+  filter: brightness(0.9) !important;
+  box-shadow: 0 4px 12px rgba(13,148,136,0.3) !important;
+}
+
+.woocommerce button[name="update_cart"] {
+  background: transparent !important;
+  border: 2px solid var(--navy) !important;
+  color: var(--navy) !important;
+  transition: background 220ms ease, color 220ms ease !important;
+}
+
+.woocommerce button[name="update_cart"]:hover {
+  background: var(--navy) !important;
+  color: #ffffff !important;
+}
+
+/* ── Sidebar active nav item indicator ── */
+.phase1-nav li.current-menu-item,
+.phase1-nav li.current_page_item {
+  border-left: 3px solid var(--amber) !important;
+  padding-left: 0 !important;
+}
+
+/* ── Horizontal rule / dividers ── */
+hr.wp-block-separator {
+  border-color: var(--green-mid) !important;
+  opacity: 1 !important;
+}
+
+/* ── Price tag accent ── */
+.woocommerce-Price-amount bdi,
+.price bdi {
+  color: var(--green-dk) !important;
+  font-weight: 800 !important;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   TYPOGRAPHY SYSTEM
+   Body     → Lato            (clean, readable)
+   Headings → Playfair Display (elegant serif)
+   UI/Nav   → Poppins          (geometric, modern)
+═══════════════════════════════════════════════════════ */
+
+/* ── Base body font ── */
+body, p, li, td, input, textarea, select {
+  font-family: var(--font-body) !important;
+}
+
+/* ── All headings → Playfair Display ── */
+h1, h2, h3, h4, h5, h6,
+.wp-block-heading,
+.wp-block-post-title,
+.entry-title,
+.page-title,
+.woocommerce-loop-product__title,
+.product_title,
+.cart_totals h2,
+.woocommerce-cart-form h2 {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+}
+
+/* ── Nav links → Poppins ── */
+.phase1-nav a,
+.phase1-nav li,
+.wp-block-navigation a,
+.wp-block-navigation li {
+  font-family: var(--font-ui) !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* ── Buttons → Poppins ── */
+.wp-block-button__link,
+button,
+.button,
+input[type="submit"],
+a.button {
+  font-family: var(--font-ui) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.03em !important;
+}
+
+/* ── Prices → Poppins ── */
+.woocommerce-Price-amount,
+.price {
+  font-family: var(--font-ui) !important;
+  font-weight: 700 !important;
+}
+
+/* ── Blog meta (date, category) → Lato italic ── */
+.wp-block-post-date,
+.wp-block-post-terms,
+time {
+  font-family: var(--font-body) !important;
+  font-style: italic !important;
+  font-size: 0.95rem !important;
+  color: var(--muted) !important;
+}
+
+/* ── Form labels & table headers → Poppins ── */
+label, .wpcf7 label, th {
+  font-family: var(--font-ui) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── Excerpts → Lato, slightly larger ── */
+.wp-block-post-excerpt__excerpt,
+.wp-block-post-excerpt p {
+  font-family: var(--font-body) !important;
+  font-size: 1.1rem !important;
+  line-height: 1.8 !important;
+}
+
+/* ── Blockquotes → Playfair italic ── */
+blockquote, .wp-block-quote {
+  font-family: var(--font-heading) !important;
+  font-style: italic !important;
+  font-size: 1.35rem !important;
+  color: var(--navy) !important;
+  border-left: 4px solid var(--amber) !important;
+  padding-left: 1.25rem !important;
+}
+
+/* ── Legal pages — back to account button ── */
+.phase1-back-btn {
+  position: fixed !important;
+  top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px) + 1rem) !important;
+  left: calc(var(--nav-w) + 1.25rem) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+  font-family: var(--font-ui) !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  color: var(--navy) !important;
+  background: #fff !important;
+  border: 0.0625rem solid var(--border) !important;
+  border-radius: var(--r-pill) !important;
+  padding: 0.4rem 0.9rem !important;
+  text-decoration: none !important;
+  box-shadow: var(--sh-sm) !important;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease !important;
+  z-index: 999 !important;
+}
+
+.phase1-back-btn:hover {
+  background: var(--navy) !important;
+  color: #fff !important;
+  border-color: var(--navy) !important;
+  box-shadow: 0 0.25rem 0.75rem rgba(30,58,95,0.2) !important;
+  transform: translateX(-0.15rem) !important;
+}
+
+/* ═══════════════════════════════════════════════════════
+   FRESH GARDEN SALAD BOWL — postid-124
+   Distinct title style: earthy teal-green gradient
+═══════════════════════════════════════════════════════ */
+.postid-124 h2.wp-block-post-title,
+.postid-124 h1.wp-block-post-title {
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.01em !important;
+  background: linear-gradient(135deg, #0d7a5f 0%, #3aaa35 50%, #7ec84a 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-shadow: none !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  display: inline !important;
+  position: relative !important;
+}
