@@ -349,3 +349,44 @@ function phase1_account_menu_legal_link_urls( $url, $endpoint ) {
     return $url;
 }
 add_filter( 'woocommerce_get_endpoint_url', 'phase1_account_menu_legal_link_urls', 10, 2 );
+
+// Adds a mobile dropdown toggle button for WooCommerce My Account navigation.
+// The button is injected client-side so no Woo template override is required.
+function phase1_account_mobile_nav_dropdown_script() {
+    if ( ! is_account_page() ) {
+        return;
+    }
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var nav = document.querySelector('.woocommerce-MyAccount-navigation');
+
+        if (!nav || nav.querySelector('.phase1-account-nav-toggle')) {
+            return;
+        }
+
+        var menuList = nav.querySelector('ul');
+
+        if (!menuList) {
+            return;
+        }
+
+        var toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.className = 'phase1-account-nav-toggle';
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.textContent = 'Account Menu';
+
+        nav.insertBefore(toggleBtn, menuList);
+        nav.classList.add('is-collapsed');
+
+        toggleBtn.addEventListener('click', function () {
+            var isOpen = nav.classList.toggle('is-open');
+            nav.classList.toggle('is-collapsed', !isOpen);
+            toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    });
+    </script>
+    <?php
+}
+add_action( 'wp_footer', 'phase1_account_mobile_nav_dropdown_script', 32 );

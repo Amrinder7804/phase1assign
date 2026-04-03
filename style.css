@@ -378,35 +378,6 @@ input, select, textarea { font: inherit; }
   padding: 0 0.25rem !important;
 }
 
-/* ═══════════════════════════════════════════════════════
-   MOBILE  < 769px — hamburger mode
-═══════════════════════════════════════════════════════ */
-@media (max-width: 48rem) {  /* 768px */
-
-  body { padding-left: 0; padding-right: 0; }
-  main.wp-block-group { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
-
-  /* On mobile sidebar slides in from top:0, full height */
-  .phase1-sidebar {
-    top: var(--wp-admin--admin-bar--height, 0px) !important;
-    height: calc(100vh - var(--wp-admin--admin-bar--height, 0px)) !important;
-    transform: translateX(-100%);
-    box-shadow: var(--sh-lg);
-  }
-  .phase1-sidebar-head { display: flex; }
-  .phase1-sidebar-brand { display: block; }
-  .phase1-sidebar-close { display: flex; }
-  .phase1-overlay { display: block; }
-
-  .phase1-nav-checkbox:checked ~ .phase1-sidebar  { transform: translateX(0); }
-  .phase1-nav-checkbox:checked ~ .phase1-overlay  { opacity: 1; visibility: visible; }
-
-  .phase1-hamburger { display: flex; }
-
-  .phase1-topbar { padding: 0 1rem !important; gap: 0.75rem !important; }
-  .phase1-top-search { display: none !important; }
-  .phase1-topbar-brand img { height: 2.375rem !important; }
-}
 
 /* ═══════════════════════════════════════════════════════
    TYPOGRAPHY
@@ -498,15 +469,6 @@ main.is-layout-constrained {
 main.wp-block-group > * {
   max-width: 100% !important;
   box-sizing: border-box !important;
-}
-
-@media (max-width: 48rem) {
-  main.wp-block-group,
-  main.wp-block-group.is-layout-constrained,
-  main.is-layout-constrained {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -964,8 +926,7 @@ main.wp-block-group > * {
   border-radius: var(--r-sm);
 }
 
-/* =========================================================
-   RECIPE SINGLE - FORCE FALLBACK (live template safe)
+/* RECIPE SINGLE - FORCE FALLBACK (live template safe)
    The .single:not(.single-product) guard keeps these rules
    off the WooCommerce single product page, which shares
    the .single body class but has its own layout. */
@@ -2375,6 +2336,54 @@ li.product .price {
   color: var(--green);
 }
 
+.phase1-account-nav-toggle {
+  display: none;
+}
+
+@media (max-width: 64rem) {
+  .woocommerce-account .woocommerce-MyAccount-navigation {
+    padding: 0.75rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .woocommerce-account .phase1-account-nav-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    min-height: 2.75rem !important;
+    border: 0.0625rem solid var(--green-mid) !important;
+    border-radius: var(--r-sm) !important;
+    background: var(--green-lt) !important;
+    color: var(--green) !important;
+    font-family: var(--font-ui, inherit) !important;
+    font-size: var(--fs-sm) !important;
+    font-weight: 700 !important;
+    padding: 0.55rem 0.8rem !important;
+    margin: 0 !important;
+  }
+
+  .woocommerce-account .phase1-account-nav-toggle::after {
+    content: '\25BE';
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation.is-open .phase1-account-nav-toggle::after {
+    content: '\25B4';
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation.is-collapsed ul {
+    display: none !important;
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation.is-open ul {
+    display: flex !important;
+    margin-top: 0.5rem !important;
+  }
+}
+
 .woocommerce-account .woocommerce-MyAccount-content > p {
   text-align: left !important;
   margin-bottom: 1rem !important;
@@ -3150,6 +3159,47 @@ div.wp-block-group.legal-page--terms {
 }
 
 /* ═══════════════════════════════════════════════════════
+   RESPONSIVE — ≤ 48rem (768px) — mobile core
+═══════════════════════════════════════════════════════ */
+@media (max-width: 48rem) {
+  body { padding-left: 0; padding-right: 0; }
+
+  main.wp-block-group,
+  main.wp-block-group.is-layout-constrained,
+  main.is-layout-constrained {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  .phase1-sidebar {
+    top: var(--wp-admin--admin-bar--height, 0px) !important;
+    height: calc(100vh - var(--wp-admin--admin-bar--height, 0px)) !important;
+    transform: translateX(-100%);
+    box-shadow: var(--sh-lg);
+    z-index: 900 !important;
+  }
+
+  .phase1-sidebar-head { display: flex; }
+  .phase1-sidebar-brand { display: block; }
+  .phase1-sidebar-close { display: flex; }
+
+  .phase1-overlay {
+    display: block;
+    z-index: 899 !important;
+    pointer-events: none !important;
+  }
+
+  .phase1-nav-checkbox:checked ~ .phase1-sidebar { transform: translateX(0); }
+  .phase1-nav-checkbox:checked ~ .phase1-overlay { opacity: 1; visibility: visible; }
+  .phase1-nav-checkbox:checked ~ .phase1-overlay { pointer-events: auto !important; }
+
+  .phase1-hamburger { display: flex; }
+  .phase1-topbar { padding: 0 1rem !important; gap: 0.75rem !important; }
+  .phase1-top-search { display: none !important; }
+  .phase1-topbar-brand img { height: 2.375rem !important; }
+}
+
+/* ═══════════════════════════════════════════════════════
    RESPONSIVE — ≤ 64rem (1024px) — tablet + product grid
 ═══════════════════════════════════════════════════════ */
 @media (max-width: 64rem) {
@@ -3172,21 +3222,175 @@ div.wp-block-group.legal-page--terms {
   .wp-block-columns.contact-grid > .wp-block-column {
     width: 100% !important; flex-basis: 100% !important;
   }
-  /* Footer */
-  .phase1-footer-top { flex-direction: column !important; gap: 2rem !important; }
-  .phase1-footer-inner { padding: 2.5rem 1.5rem 0 !important; }
-  .phase1-footer-links { padding: 1rem !important; }
+  /* Footer — 2-column grid on tablet, columns fill full width */
+  .phase1-footer-top {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    align-items: start !important;
+  }
+  /* Third column (Flyers) spans both columns at the bottom */
+  .phase1-footer-top > .wp-block-column:last-child {
+    grid-column: 1 / -1 !important;
+  }
+  .phase1-footer-top > .wp-block-column {
+    flex: unset !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .phase1-footer-inner { padding: 2rem 1.5rem 0 !important; }
+  .phase1-footer-links { padding: 1rem 1.25rem !important; }
   /* My account */
   .woocommerce-account .woocommerce { flex-direction: column !important; }
   .woocommerce-MyAccount-navigation { width: 100%; }
   .woocommerce-MyAccount-content { padding-left: 0; padding-top: 1.5rem; }
-  /* Cart — stacked on tablet (handled by cart responsive block above) */
+  /* Cart — use grid stack on tablet so checkout totals stays visible */
+  .phase1-cart-layout,
+  .woocommerce-cart .woocommerce,
+  .woocommerce-page .woocommerce {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .cart-collaterals {
+    width: 100% !important;
+  }
+  .cart_totals {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
   /* Single product */
   .woocommerce div.product .wp-block-columns { flex-direction: column !important; }
   .single-product .woocommerce div.product { grid-template-columns: 1fr !important; gap: 2rem !important; }
   /* Hero */
   .home-hero { padding: 2.5rem 1.5rem !important; }
   .home-hero-title { font-size: 1.75rem; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE — ≤ 47.9375rem (767px) — phone
+═══════════════════════════════════════════════════════ */
+@media (max-width: 47.9375rem) {
+
+  /* Hero — reduce padding from the 64rem value (2.5rem 1.5rem) to something tighter */
+  .home-hero {
+    padding: 1.75rem 1rem !important;
+    border-radius: var(--r-md) !important;
+  }
+  .home-hero-title { font-size: clamp(1.4rem, 6vw, 1.75rem) !important; }
+  .home-hero-text  { font-size: var(--fs-sm) !important; }
+
+  /* Feature / category card columns — single column on phone */
+  .home-feature-grid .wp-block-column,
+  .home-categories-grid .wp-block-column {
+    flex-basis: 100% !important;
+    width: 100% !important;
+  }
+
+  /* About cards — 1 column on phone */
+  .about-cards-grid { grid-template-columns: 1fr !important; }
+  .about-hero-box   { padding: 1.75rem 1.25rem !important; }
+  .about-org-layout { grid-template-columns: 1fr !important; }
+  .about-org-box,
+  .about-values-box { padding: 1.5rem 1.25rem !important; }
+
+  /* Single product — stack image above details */
+  .single-product .woocommerce div.product {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Product grid — 2 columns is usable on most phones; collapse to 1 below 30rem */
+  /* (already handled by the 30rem block below) */
+
+  /* Shop hero / toolbar — tighter padding on phone */
+  .shop-hero-box { padding: 1.25rem 1rem !important; }
+  .shop-toolbar  { padding: 0.5rem 0.75rem !important; }
+
+  /* Cart — full-width coupon input on phone */
+  .woocommerce-cart-form .coupon { flex-direction: column !important; }
+  .woocommerce-cart-form .coupon input { width: 100% !important; }
+
+  /* My account — stack nav above content (already at 64rem, keep gap tighter) */
+  .woocommerce-account .woocommerce { gap: 1rem !important; }
+  .woocommerce-MyAccount-content    { padding-top: 0.75rem !important; }
+
+  /* Footer — clean single-column layout on phone */
+  .phase1-footer {
+    border-top-left-radius: var(--r-md) !important;
+    border-top-right-radius: var(--r-md) !important;
+    margin-top: 1rem !important;
+  }
+  .phase1-footer-inner  { padding: 1.25rem 0.875rem 0 !important; }
+  .phase1-footer-top {
+    flex-direction: column !important;
+    gap: 0.625rem !important;
+    align-items: stretch !important;
+  }
+  /* Each column must fill full width — WP block columns fight this */
+  .phase1-footer-top > .wp-block-column {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .phase1-footer-links {
+    padding: 0.875rem 1rem !important;
+    border-radius: var(--r-sm) !important;
+    text-align: left !important;
+  }
+  .phase1-footer-links h3 {
+    font-size: var(--fs-xs) !important;
+    margin-bottom: 0.5rem !important;
+    padding-bottom: 0.375rem !important;
+  }
+  /* Horizontal scrolling link row on phone — saves vertical space */
+  .phase1-footer-links ul {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 0.25rem 0.5rem !important;
+    align-items: flex-start !important;
+  }
+  .phase1-footer-links ul li a {
+    font-size: var(--fs-xs) !important;
+    padding: 0.15rem 0.4rem !important;
+    text-align: left !important;
+    background: rgba(255,255,255,.06) !important;
+    border-radius: var(--r-sm) !important;
+  }
+  .phase1-footer-bottom {
+    margin-top: 1rem !important;
+    padding: 0.75rem 0 !important;
+    font-size: var(--fs-xs) !important;
+  }
+  .phase1-footer-bottom p { font-size: var(--fs-xs) !important; }
+  .phase1-footer-disclaimer {
+    font-size: 0.65rem !important;
+    padding: 0.25rem 0 1rem !important;
+  }
+
+  /* Legal pages — tighter outer padding on phone */
+  .legal-page { padding: 1.25rem 1rem 3rem !important; }
+
+  /* Section dividers — reduce vertical breathing room */
+  .section-divider,
+  .wp-block-separator { margin: 1.5rem 0 !important; }
+
+  /* Blog query grid — 1 column on phone */
+  .wp-block-query > .wp-block-post-template,
+  .wp-block-query ul.wp-block-post-template,
+  .wp-block-query .is-layout-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Blog archive hero */
+  .blog-archive-title { font-size: clamp(1.35rem, 5.5vw, 1.75rem) !important; }
+
+  /* Contact layout already 1-col at 48rem — ensure form is full width */
+  .contact-info-box,
+  .contact-form-box { padding: 1.25rem 1rem !important; }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -3737,9 +3941,9 @@ blockquote, .wp-block-quote {
 
 /* ── Back button — shared base for legal, blog, and single post pages ── */
 .phase1-back-btn {
-  position: fixed !important;
-  top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px) + 1rem) !important;
-  left: calc(var(--nav-w) + 1.25rem) !important;
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
   display: inline-flex !important;
   align-items: center !important;
   gap: 0.4rem !important;
@@ -3777,11 +3981,11 @@ blockquote, .wp-block-quote {
   box-shadow: 0 0.25rem 0.75rem rgba(217,119,6,0.2) !important;
 }
 
-/* On mobile, back button stacks below the topbar (no sidebar offset) */
+/* On mobile, back button keeps relative flow — no offset needed */
 @media (max-width: 48rem) {
   .phase1-back-btn {
-    left: 1rem !important;
-    top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px) + 0.5rem) !important;
+    left: auto !important;
+    top: auto !important;
   }
 }
 
@@ -3803,7 +4007,7 @@ blockquote, .wp-block-quote {
   text-shadow: none !important;
   border-radius: 0 !important;
   background-color: transparent !important;
-  padding: 0 !important;
+  padding: 0 0 0 1.25rem !important;
   display: inline !important;
   position: relative !important;
 }
@@ -4266,6 +4470,145 @@ blockquote, .wp-block-quote {
 
 /* ── Mobile ── */
 @media (max-width: 47.9rem) {
+  html {
+    margin-top: 0 !important;
+  }
+
+  header.wp-block-template-part {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .phase1-shell-header {
+    top: 0 !important;
+    height: auto !important;
+  }
+
+  .admin-bar .phase1-shell-header {
+    top: var(--wp-admin--admin-bar--height, 0px) !important;
+  }
+
+  .phase1-topbar {
+    flex-wrap: wrap !important;
+    height: auto !important;
+  }
+  .phase1-topbar {
+    align-items: center !important;
+    row-gap: 0.5rem !important;
+    padding: 0.5rem 0.75rem 0.65rem !important;
+  }
+
+  .phase1-hamburger {
+    order: 1 !important;
+  }
+
+  .phase1-topbar-brand {
+    order: 2 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .phase1-topbar-right {
+    order: 3 !important;
+  }
+
+  .phase1-top-search {
+    display: block !important;
+    order: 4 !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    margin: 0.2rem auto 0 !important;
+  }
+
+  .phase1-top-search .wp-block-search__inside-wrapper {
+    height: 2.5rem !important;
+    width: 60% !important;
+    margin-left: 4rem !important;
+  }
+
+  body {
+    padding-top: calc(var(--bar-h) + 3.1rem + var(--wp-admin--admin-bar--height, 0px)) !important;
+  }
+
+  .phase1-back-btn {
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .blog main.wp-block-group,
+  .single-post main.wp-block-group {
+    padding-top: 3.25rem !important;
+  }
+
+  .phase1-overlay {
+    z-index: 899 !important;
+    pointer-events: none !important;
+  }
+
+  .phase1-sidebar {
+    z-index: 900 !important;
+  }
+
+  .phase1-nav-checkbox:checked ~ .phase1-overlay {
+    pointer-events: auto !important;
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation {
+    padding: 0.75rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .woocommerce-account .phase1-account-nav-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    min-height: 2.75rem !important;
+    border: 0.0625rem solid var(--green-mid) !important;
+    border-radius: var(--r-sm) !important;
+    background: var(--green-lt) !important;
+    color: var(--green) !important;
+    font-family: var(--font-ui, inherit) !important;
+    font-size: var(--fs-sm) !important;
+    font-weight: 700 !important;
+    padding: 0.55rem 0.8rem !important;
+    margin: 0 !important;
+  }
+
+  .woocommerce-account .phase1-account-nav-toggle::after {
+    content: '\25BE';
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation.is-open .phase1-account-nav-toggle::after {
+    content: '\25B4';
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation.is-collapsed ul {
+    display: none !important;
+  }
+
+  .woocommerce-account .woocommerce-MyAccount-navigation.is-open ul {
+    display: flex !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .woocommerce-account .woocommerce-Addresses {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  .woocommerce-account .woocommerce-Address {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow-wrap: anywhere;
+  }
+
   .single-post .recipe-top {
     flex-direction: column !important;
     gap: 1.5rem !important;
