@@ -85,7 +85,9 @@ body {
   background: var(--bg);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
-  /* Desktop: indent for fixed sidebar + fixed topbar */
+  /* Offset the body so content isn't hidden behind the fixed sidebar and topbar.
+     var(--wp-admin--admin-bar--height, 0px) accounts for the WP admin bar,
+     which adds 32 px when logged in and 0 px on the front end for visitors. */
   padding-left: var(--nav-w);
   padding-top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px));
   padding-right: 0;
@@ -103,13 +105,10 @@ input, select, textarea { font: inherit; }
    Mobile  < 1025px : full-width topbar + slide-in drawer
 ═══════════════════════════════════════════════════════ */
 
-/* Main content padding — all pages */
-main.wp-block-group {
-  padding-left: max(2.5rem, 3vw) !important;
-  padding-right: max(2.5rem, 3vw) !important;
-}
-
-/* Hidden checkbox — toggle engine */
+/* Hidden checkbox — CSS-only toggle engine for the mobile sidebar.
+   Checking it via a <label> trigger shows the sidebar and overlay
+   without any JavaScript. Visually hidden but kept in the DOM so
+   :checked can be used as a state selector in later rules. */
 .phase1-nav-checkbox {
   position: fixed;
   width: 0.0625rem; height: 0.0625rem;
@@ -179,7 +178,7 @@ main.wp-block-group {
   color: var(--muted);
 }
 
-/* Nav links */
+/* Sidebar nav links — vertical stack inside the slide-in menu */
 .phase1-sidebar-nav { flex: 1; padding: 0.25rem 0 0.5rem; }
 .phase1-sidebar-nav ul { display: flex; flex-direction: column; }
 .nav-icon { font-size: 0.95rem; width: 1.375rem; text-align: center; flex-shrink: 0; }
@@ -248,7 +247,7 @@ main.wp-block-group {
   height: var(--bar-h) !important;
 }
 
-/* Hamburger — hidden on desktop */
+/* Hamburger — hidden on desktop, shown on mobile to open the sidebar */
 .phase1-hamburger {
   display: none;
   flex-direction: column;
@@ -270,7 +269,7 @@ main.wp-block-group {
   transition: transform var(--t), opacity var(--t);
 }
 
-/* Logo */
+/* Top bar logo — sizing and flex alignment inside the header */
 .phase1-topbar-brand {
   flex-shrink: 0 !important;
   display: flex !important;
@@ -288,7 +287,7 @@ main.wp-block-group {
   object-fit: contain !important;
 }
 
-/* Search — centre */
+/* Header search bar — centered layout and interactive focus styling */
 .wp-block-search.phase1-top-search {
   flex: 1 1 0% !important;
   max-width: 32.5rem !important;
@@ -339,7 +338,7 @@ main.wp-block-group {
 .phase1-top-search .wp-block-search__button:hover { background: var(--green-dk) !important; }
 .phase1-top-search .wp-block-search__button svg { width: 1rem; height: 1rem; fill: #fff; }
 
-/* Cart */
+/* Header cart badge — pill button with live item count in the top bar */
 .phase1-topbar-right {
   flex-shrink: 0 !important;
   display: flex !important;
@@ -621,7 +620,9 @@ main.wp-block-group > * {
   width: 100% !important;
 }
 
-/* The post-template list that WP renders for the query block */
+/* WP renders the query block's post list as a <ul> with multiple possible class
+   names depending on the WordPress version. All three selectors are needed to
+   cover the different markup WP may output. */
 .wp-block-query > .wp-block-post-template,
 .wp-block-query ul.wp-block-post-template,
 .wp-block-query .is-layout-grid {
@@ -736,6 +737,9 @@ main.wp-block-group > * {
 
 /* ═══════════════════════════════════════════════════════
    RECIPE / QUERY LOOP CARD ALIGNMENT
+   Fixed image, title, and excerpt heights keep all cards
+   visually even inside Query Loop output, regardless of
+   how much content each post has.
 ═══════════════════════════════════════════════════════ */
 .wp-block-query .wp-block-post-template > li {
   display: flex !important;
@@ -962,7 +966,9 @@ main.wp-block-group > * {
 
 /* =========================================================
    RECIPE SINGLE - FORCE FALLBACK (live template safe)
-   ========================================================= */
+   The .single:not(.single-product) guard keeps these rules
+   off the WooCommerce single product page, which shares
+   the .single body class but has its own layout. */
 .single:not(.single-product) main.wp-block-group,
 .single-recipe main.wp-block-group {
   padding-left: max(2rem, 4vw) !important;
@@ -1870,6 +1876,8 @@ li.product .price {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+/* Remove browser number-input spinners — replaced by the custom +/- buttons
+   injected via phase1_single_product_quantity_controls_script in functions.php. */
 .woocommerce div.product form.cart .qty::-webkit-outer-spin-button,
 .woocommerce div.product form.cart .qty::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -1954,7 +1962,9 @@ li.product .price {
                            + div.cart-collaterals > div.cart_totals
 ═══════════════════════════════════════════════════════ */
 
-/* Reliable flex wrapper injected via PHP hook */
+/* .phase1-cart-layout is injected by phase1_cart_layout_open/close in functions.php.
+   WooCommerce outputs the cart form and totals as siblings with no shared parent,
+   so a wrapper div is the only reliable way to put them in a flex row. */
 .phase1-cart-layout {
   display: flex !important;
   align-items: flex-start !important;
@@ -2984,7 +2994,10 @@ a.contact-info-value:hover { color: var(--green); }
 
 /* ── Terms page — match privacy layout exactly ── */
 
-/* Title banner — same green box as privacy */
+/* page-id-66 is the Terms & Conditions page ID in this install.
+   Using the ID here because the page uses wp:post-title (a dynamic block)
+   rather than a static h1, so a class-based rule on the template alone
+   is not enough to override WP block-theme spacing. */
 .page-id-66 h1.wp-block-post-title,
 .page-id-66 .page-title {
   font-size: clamp(1.5rem, 3vw, var(--fs-2xl)) !important;
@@ -3529,6 +3542,7 @@ a.checkout-button:hover {
 .wp-block-heading.has-text-align-center,
 h2.wp-block-heading {
   position: relative !important;
+  padding-left: 2rem;
 }
 
 /* ── Footer ── */
@@ -3721,7 +3735,7 @@ blockquote, .wp-block-quote {
   padding-left: 1.25rem !important;
 }
 
-/* ── Legal pages — back to account button ── */
+/* ── Back button — shared base for legal, blog, and single post pages ── */
 .phase1-back-btn {
   position: fixed !important;
   top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px) + 1rem) !important;
@@ -3749,6 +3763,26 @@ blockquote, .wp-block-quote {
   border-color: var(--navy) !important;
   box-shadow: 0 0.25rem 0.75rem rgba(30,58,95,0.2) !important;
   transform: translateX(-0.15rem) !important;
+}
+
+/* Blog / single post variant — amber accent instead of navy */
+.phase1-back-btn--blog {
+  color: var(--amber-dk) !important;
+  border-color: var(--amber-mid) !important;
+}
+.phase1-back-btn--blog:hover {
+  background: var(--amber-dk) !important;
+  color: #fff !important;
+  border-color: var(--amber-dk) !important;
+  box-shadow: 0 0.25rem 0.75rem rgba(217,119,6,0.2) !important;
+}
+
+/* On mobile, back button stacks below the topbar (no sidebar offset) */
+@media (max-width: 48rem) {
+  .phase1-back-btn {
+    left: 1rem !important;
+    top: calc(var(--bar-h) + var(--wp-admin--admin-bar--height, 0px) + 0.5rem) !important;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════

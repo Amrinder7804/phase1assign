@@ -1,4 +1,10 @@
 <!-- wp:html -->
+<!--
+  CSS-only sidebar toggle: checking this hidden input via <label for="phase1-nav-toggle">
+  triggers the sidebar slide-in and overlay using :checked sibling selectors in style.css.
+  No JavaScript is required for open/close. The overlay label below closes the menu on
+  outside-click by unchecking the same input.
+-->
 <input type="checkbox" id="phase1-nav-toggle" class="phase1-nav-checkbox" aria-hidden="true">
 <label for="phase1-nav-toggle" class="phase1-overlay" aria-hidden="true"></label>
 
@@ -24,9 +30,11 @@
 </aside>
 <!-- /wp:html -->
 
+<!-- Fixed top navigation bar: logo left, search center, cart right -->
 <!-- wp:group {"tagName":"header","className":"phase1-shell-header","layout":{"type":"constrained"}} -->
 <header class="wp-block-group phase1-shell-header">
 
+	<!-- Top utility area with logo, search bar, and cart badge -->
 	<!-- wp:group {"className":"phase1-topbar","layout":{"type":"flex","justifyContent":"space-between","verticalAlignment":"center","flexWrap":"nowrap"}} -->
 	<div class="wp-block-group phase1-topbar">
 
@@ -37,14 +45,17 @@
 		</label>
 		<!-- /wp:html -->
 
+		<!-- Site logo — links to homepage -->
 		<!-- wp:group {"className":"phase1-topbar-brand","layout":{"type":"flex","verticalAlignment":"center","flexWrap":"nowrap"}} -->
 		<div class="wp-block-group phase1-topbar-brand">
 			<!-- wp:site-logo {"width":64} /-->
 		</div>
 		<!-- /wp:group -->
 
+		<!-- Sitewide search — searches products, posts, and recipes -->
 		<!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search products, posts, and recipes","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true,"className":"phase1-top-search"} /-->
 
+		<!-- Cart icon with live item count badge — updated via WooCommerce AJAX fragments -->
 		<!-- wp:group {"className":"phase1-topbar-right","layout":{"type":"flex","verticalAlignment":"center","flexWrap":"nowrap"}} -->
 		<div class="wp-block-group phase1-topbar-right">
 			<!-- wp:shortcode -->
